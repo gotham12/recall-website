@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-white antialiased;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  @apply bg-recall-blue/30 text-white;
+}
+
+.glass {
+  @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+}
+
+.glass-strong {
+  @apply border border-white/[0.12] bg-white/[0.07] backdrop-blur-2xl;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent;
+}
+
+.text-gradient-accent {
+  @apply bg-gradient-to-r from-recall-blue via-recall-violet to-recall-sky bg-clip-text text-transparent;
+}
+
+.section-label {
+  @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45;
+}
+
+.phone-frame {
+  @apply relative overflow-hidden rounded-[2.4rem] border border-white/15 bg-ink-100 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.75)];
+}
+
+.phone-notch {
+  @apply absolute left-1/2 top-3 z-20 h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-black/80;
+}
+
+.grid-bg {
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 75%);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.shimmer-border {
+  background: linear-gradient(90deg, transparent, rgba(79,140,255,0.35), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+}
