@@ -221,6 +221,75 @@ body {
   backdrop-filter: blur(16px);
 }
 
+/* Emotional color journey — problem (dark) vs product (bright) */
+.theme-problem {
+  color-scheme: dark;
+}
+
+.theme-problem .section-label {
+  @apply text-recall-coral/75;
+}
+
+.theme-problem .glass,
+.theme-problem .glass-strong {
+  @apply border-recall-coral/15 bg-problem-900/70;
+}
+
+.theme-product {
+  color-scheme: light;
+}
+
+.theme-product .section-label {
+  @apply text-recall-blue/80;
+}
+
+.theme-product .glass,
+.theme-product .glass-strong {
+  @apply border-recall-blue/15 bg-white/70 text-product-950 shadow-sm;
+}
+
+.theme-product .text-white {
+  @apply text-product-950;
+}
+
+.theme-product .text-white\/55,
+.theme-product .text-white\/50,
+.theme-product .text-white\/60 {
+  @apply text-product-800/70;
+}
+
+.theme-product .border-white\/5,
+.theme-product .border-white\/10 {
+  @apply border-product-200/80;
+}
+
+.theme-product .bg-ink-50\/40,
+.theme-product .bg-ink-50\/30 {
+  @apply bg-product-100/60;
+}
+
+.theme-product .bg-ink-100\/70,
+.theme-product .bg-ink-100\/60,
+.theme-product .bg-ink-100\/80 {
+  @apply bg-white/90 shadow-sm;
+}
+
+.theme-product .bg-ink-200 {
+  @apply bg-product-100;
+}
+
+.theme-product .scroll-stack-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(79, 140, 255, 0.12);
+}
+
+.theme-product .wordmark-gradient {
+  background: linear-gradient(180deg, rgba(11, 22, 40, 0.08) 0%, rgba(11, 22, 40, 0.02) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 @layer base {
   .theme {
     --font-heading: var(--font-sans);

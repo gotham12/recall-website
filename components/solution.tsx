@@ -36,14 +36,15 @@ const tags = ['Offline-first', 'Edge AI on Cloudflare', 'Apple Health', 'Comfort
 
 export function SolutionSection() {
   return (
-    <section id="solution" className="relative overflow-hidden border-y border-white/5 bg-ink-50/40 py-24 md:py-32">
+    <section id="solution" className="relative overflow-hidden border-y border-product-200/80 bg-white/50 py-24 md:py-32">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(52,211,153,0.15),transparent_40%),radial-gradient(circle_at_10%_100%,rgba(79,140,255,0.12),transparent_35%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
         <FadeContent blur className="max-w-2xl">
-          <p className="section-label mb-4">The solution</p>
-          <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl !leading-[1.08] text-white md:!text-5xl">
+          <p className="section-label mb-4">Chapter 2 · The product</p>
+          <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl !leading-[1.08] text-product-950 md:!text-5xl">
             Recall closes the gap before crisis.
           </ScrollReveal>
-          <p className="mt-5 text-lg leading-relaxed text-white/55">
+          <p className="mt-5 text-lg leading-relaxed text-product-800/70">
             Recall is an AI-native cognitive care platform — not another pill reminder. It listens, scores, verifies,
             and de-escalates across two purpose-built experiences linked by one real-time care graph.
           </p>
@@ -51,7 +52,7 @@ export function SolutionSection() {
 
         <FadeContent blur className="mt-12 flex flex-wrap items-center gap-3">
           {tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="border-white/10 bg-white/5 text-white/60">
+            <Badge key={tag} variant="outline" className="border-product-200 bg-product-100/80 text-product-800/70">
               {tag}
             </Badge>
           ))}
@@ -61,18 +62,18 @@ export function SolutionSection() {
           {pillars.map((p) => (
             <FadeContent key={p.title} blur threshold={0.12}>
               <SpotlightCard
-                className="h-full border-white/10 bg-ink-100/70 p-8"
+                className="h-full border-product-200 bg-white/90 p-8 shadow-lg shadow-recall-blue/5"
                 spotlightColor="rgba(79, 140, 255, 0.2)"
               >
-                <Badge variant="outline" className="mb-4 border-white/10 bg-black/20 text-[10px] uppercase tracking-widest text-white/50">
+                <Badge variant="outline" className="mb-4 border-product-200 bg-product-50 text-[10px] uppercase tracking-widest text-product-800/60">
                   {p.tag}
                 </Badge>
                 <p.icon className="mb-4 h-7 w-7 text-recall-blue" strokeWidth={1.5} />
-                <h3 className="font-display text-2xl">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">{p.desc}</p>
+                <h3 className="font-display text-2xl text-product-950">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-product-800/70">{p.desc}</p>
                 <ul className="mt-6 space-y-2">
                   {p.bullets.map((b) => (
-                    <li key={b} className="text-sm text-white/50">
+                    <li key={b} className="text-sm text-product-800/65">
                       {b}
                     </li>
                   ))}
@@ -88,19 +89,19 @@ export function SolutionSection() {
             aspectRatio="auto"
             borderRadius="1.5rem"
             colorPreset="aurora"
-            className="min-h-[220px] border-white/10 bg-ink-100/80"
+            className="min-h-[220px] border-product-200 bg-white/90"
           >
             <div className="flex w-full flex-col items-start justify-between gap-6 p-8 md:flex-row md:items-center md:p-10">
               <div className="max-w-xl text-left">
                 <p className="section-label mb-2">The Recall difference</p>
-                <h3 className="font-display text-2xl md:text-3xl">Prevention, not paperwork.</h3>
-                <p className="mt-3 text-white/55">
+                <h3 className="font-display text-2xl text-product-950 md:text-3xl">Prevention, not paperwork.</h3>
+                <p className="mt-3 text-product-800/70">
                   Most tools track tasks. Recall tracks cognitive stability — then acts. ACSE below 50 triggers Comfort
                   Mode. Clara detects loneliness and opens family photos. Susan gets the briefing before she even asks.
                 </p>
               </div>
               <button type="button" onClick={() => document.querySelector('#demo')?.scrollIntoView({ behavior: 'smooth' })}>
-                <AnimatedButton className="rounded-full bg-white text-ink dark:bg-white dark:text-ink">
+                <AnimatedButton className="rounded-full bg-recall-blue text-white dark:bg-recall-blue dark:text-white">
                   Watch the demo
                 </AnimatedButton>
               </button>

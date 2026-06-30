@@ -23,16 +23,12 @@ export const metadata: Metadata = {
     title: 'Recall — AI Cognitive Care',
     description: 'Clara for patients. Recall AI for caregivers. One source of truth.',
   },
-  icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-screen bg-ink text-white antialiased">
+    <html lang="en">
+      <body className="min-h-screen antialiased">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

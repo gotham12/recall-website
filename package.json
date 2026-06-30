@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/sync-assets.mjs",
     "build": "NEXT_PUBLIC_BASE_PATH=/recall-website next build",
     "start": "next start",
     "lint": "next lint"

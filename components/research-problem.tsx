@@ -81,11 +81,12 @@ export function ResearchProblemSection() {
       />
 
       <section id="problem" className="relative overflow-hidden py-24 md:py-32">
-        <div className="mx-auto max-w-6xl px-6">
-          <FadeContent blur className="max-w-2xl">
-            <p className="section-label mb-4">The crisis in neurodegenerative care</p>
-            <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl !leading-[1.08] text-white md:!text-5xl lg:!text-[3.25rem]">
-              Families are the system of care. The system wasn&apos;t built for them.
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,107,74,0.14),transparent_55%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <FadeContent blur className="max-w-3xl">
+            <p className="section-label mb-4">Chapter 1 · The problem</p>
+            <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-5xl !leading-[1.02] text-white md:!text-6xl">
+              When the system fails, families absorb the shock alone.
             </ScrollReveal>
             <p className="mt-5 text-lg leading-relaxed text-white/55">
               Dementia isn&apos;t only a medical diagnosis — it&apos;s a years-long coordination problem spanning

@@ -1,32 +1,18 @@
-import {
-  CascadeSection,
-  CTASection,
-  FeaturesBento,
-  SiteFooter,
-  ScreenshotsSection,
-  StackSection,
-} from '@/components/product-sections';
-import { DemoVideoSection } from '@/components/demo-video';
-import { DualExperienceSection } from '@/components/dual-experience';
-import { ResearchProblemSection } from '@/components/research-problem';
-import { SolutionSection } from '@/components/solution';
-import { Hero, Navbar } from '@/components/sections';
+import { ContactSection } from '@/components/site/contact-section';
+import { HomeHero, Navbar } from '@/components/site/navbar';
+import { TeamSection } from '@/components/site/team-section';
+import { VisualBackdrop } from '@/components/site/visual-backdrop';
+import { SiteFooter } from '@/components/product-sections';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="relative min-h-screen overflow-hidden bg-ink text-white">
+      <VisualBackdrop variant="home" />
       <Navbar />
-      <Hero />
-      <ResearchProblemSection />
-      <SolutionSection />
-      <DemoVideoSection />
-      <DualExperienceSection />
-      <FeaturesBento />
-      <CascadeSection />
-      <ScreenshotsSection />
-      <StackSection />
-      <CTASection />
-      <SiteFooter />
+      <HomeHero />
+      <TeamSection />
+      <ContactSection />
+      <SiteFooter variant="dark" />
     </main>
   );
 }

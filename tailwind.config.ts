@@ -52,6 +52,19 @@ const config: Config = {
           mint: '#34D399',
           sky: '#38BDF8',
         },
+        problem: {
+          950: '#0A0710',
+          900: '#120A14',
+          800: '#1A0F1C',
+          700: '#241018',
+        },
+        product: {
+          50: '#F4FAFF',
+          100: '#EAF4FF',
+          200: '#D4E8FF',
+          800: '#1E3A5F',
+          950: '#0B1628',
+        },
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
@@ -71,6 +84,8 @@ const config: Config = {
       animation: {
         'float-slow': 'float 8s ease-in-out infinite',
         'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+        'drift': 'drift 12s ease-in-out infinite',
+        'glow-pulse': 'glowPulse 6s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -80,6 +95,14 @@ const config: Config = {
         pulseSoft: {
           '0%, 100%': { opacity: '0.5' },
           '50%': { opacity: '1' },
+        },
+        drift: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '50%': { transform: 'translate(12px, -18px) scale(1.05)' },
+        },
+        glowPulse: {
+          '0%, 100%': { opacity: '0.35' },
+          '50%': { opacity: '0.7' },
         },
       },
     },

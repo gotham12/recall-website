@@ -276,6 +276,6 @@ export function CTASection() {
   );
 }
 
-export function SiteFooter() {
-  return <Footer />;
+export function SiteFooter({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
+  return <Footer variant={variant} />;
 }
