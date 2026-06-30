@@ -1,24 +1,22 @@
 import { ContactSection } from '@/components/site/contact-section';
 import { DemoVideoSection } from '@/components/demo-video';
-import { HeroIntro } from '@/components/site/hero-intro';
+import { FlowerBackground } from '@/components/site/flower-background';
 import { HomeHero, Navbar } from '@/components/site/navbar';
-import { ScrollFlowers } from '@/components/site/scroll-flowers';
 import { TeamSection } from '@/components/site/team-section';
-import { VisualBackdrop } from '@/components/site/visual-backdrop';
 import { SiteFooter } from '@/components/product-sections';
 
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-ink text-white">
-      <ScrollFlowers mode="home" />
-      <VisualBackdrop variant="home" />
-      <Navbar />
-      <HeroIntro />
-      <HomeHero />
-      <DemoVideoSection />
-      <TeamSection />
-      <ContactSection />
-      <SiteFooter variant="dark" />
+      <FlowerBackground phase="home" />
+      <div className="relative z-10">
+        <Navbar />
+        <HomeHero />
+        <DemoVideoSection />
+        <TeamSection />
+        <ContactSection />
+        <SiteFooter variant="dark" />
+      </div>
     </main>
   );
 }

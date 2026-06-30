@@ -18,9 +18,7 @@ export const TEAM = [
   },
 ] as const;
 
-export const FLOWER_ASSETS = [
-  '/screenshots/flower-rose-hyperreal.png',
-  '/screenshots/flower-peony-hyperreal.png',
-  '/screenshots/flower-daisy-hyperreal.png',
-  '/screenshots/flower-lavender-hyperreal.png',
-] as const;
+export const HERO_FLOWER = {
+  bud: '/screenshots/flower-bud-closed.png',
+  bloom: '/screenshots/flower-peony-hyperreal.png',
+} as const;

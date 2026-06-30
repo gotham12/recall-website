@@ -9,25 +9,25 @@ import {
 import { DemoVideoSection } from '@/components/demo-video';
 import { DualExperienceSection } from '@/components/dual-experience';
 import { SolutionSection } from '@/components/solution';
+import { FlowerBackground } from '@/components/site/flower-background';
 import { Navbar } from '@/components/site/navbar';
-import { ScrollFlowers } from '@/components/site/scroll-flowers';
-import { VisualBackdrop } from '@/components/site/visual-backdrop';
 
 export default function ProductPage() {
   return (
     <main className="theme-product relative min-h-screen bg-product-50 text-product-950">
-      <ScrollFlowers mode="bloom" />
-      <VisualBackdrop variant="product" />
-      <Navbar tone="light" />
-      <SolutionSection />
-      <DemoVideoSection bright />
-      <DualExperienceSection />
-      <FeaturesBento />
-      <CascadeSection />
-      <ScreenshotsSection />
-      <StackSection />
-      <CTASection />
-      <SiteFooter variant="light" />
+      <FlowerBackground phase="product" />
+      <div className="relative z-10">
+        <Navbar tone="light" />
+        <SolutionSection />
+        <DemoVideoSection bright />
+        <DualExperienceSection />
+        <FeaturesBento />
+        <CascadeSection />
+        <ScreenshotsSection />
+        <StackSection />
+        <CTASection />
+        <SiteFooter variant="light" />
+      </div>
     </main>
   );
 }

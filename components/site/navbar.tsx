@@ -147,7 +147,7 @@ export function PageNavCards() {
 
 export function HomeHero() {
   return (
-    <section className="relative min-h-[88vh] overflow-hidden pt-28">
+    <section className="relative min-h-[70vh] overflow-hidden pt-28 md:pt-32">
       <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-6 py-16 text-center">
         <p className="mb-6 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/60">
           A two-chapter story
