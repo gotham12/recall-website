@@ -181,3 +181,8 @@ export const TEAM = [
 export const PAGE_BACKGROUNDS = {
   problemBrain: '/screenshots/problem-brain-atmosphere.png',
 } as const;
+
+export const HERO_BRAIN = {
+  healthy: '/screenshots/brain-healthy.png',
+  tumor: '/screenshots/brain-tumor.png',
+} as const;
