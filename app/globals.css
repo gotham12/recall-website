@@ -69,3 +69,13 @@ body {
   background-size: 200% 100%;
   animation: shimmer 4s linear infinite;
 }
+
+.gradient-border {
+  background: linear-gradient(135deg, rgba(79,140,255,0.5), rgba(139,92,246,0.3), rgba(79,140,255,0.15));
+}
+
+.video-shell {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 32px 80px -24px rgba(79,140,255,0.25);
+}

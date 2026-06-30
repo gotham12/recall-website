@@ -6,14 +6,21 @@ import {
   ScreenshotsSection,
   StackSection,
 } from '@/components/product-sections';
-import { Hero, Navbar, ProblemSection } from '@/components/sections';
+import { DemoVideoSection } from '@/components/demo-video';
+import { DualExperienceSection } from '@/components/dual-experience';
+import { ResearchProblemSection } from '@/components/research-problem';
+import { SolutionSection } from '@/components/solution';
+import { Hero, Navbar } from '@/components/sections';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <ProblemSection />
+      <ResearchProblemSection />
+      <SolutionSection />
+      <DemoVideoSection />
+      <DualExperienceSection />
       <FeaturesBento />
       <CascadeSection />
       <ScreenshotsSection />

@@ -151,6 +151,8 @@ const screens: ScreenItem[] = [
   { src: '/screenshots/patient-routine.png', alt: 'Daily routine', tag: 'Patient', title: 'Routine' },
   { src: '/screenshots/supervisor-overview.png', alt: 'Supervisor overview', tag: 'Supervisor', title: 'Overview' },
   { src: '/screenshots/supervisor-recall-ai.png', alt: 'Recall AI briefing', tag: 'Supervisor', title: 'Recall AI' },
+  { src: '/screenshots/supervisor-acse.png', alt: 'ACSE score analysis', tag: 'Supervisor', title: 'ACSE' },
+  { src: '/screenshots/supervisor-schedule.png', alt: 'Schedule and storm radar', tag: 'Supervisor', title: 'Schedule' },
   { src: '/screenshots/supervisor-insights.png', alt: 'Insights analytics', tag: 'Supervisor', title: 'Insights' },
 ];
 
@@ -283,12 +285,10 @@ export function CTASection() {
                 Open live demo
               </a>
               <a
-                href="https://www.youtube.com/watch?v=Xh_k-GUBmmA"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#demo"
                 className="rounded-full border border-white/20 px-8 py-3.5 text-sm font-medium text-white/80 transition hover:bg-white/5"
               >
-                Watch on YouTube
+                Watch demo video
               </a>
             </div>
           </div>

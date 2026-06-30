@@ -1,11 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Brain, Heart, Mic, Shield, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Brain, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 const DEMO_URL = 'https://almightytamer.github.io/recall/';
-const YOUTUBE_URL = 'https://www.youtube.com/watch?v=Xh_k-GUBmmA';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -15,6 +14,14 @@ const fadeUp = {
     transition: { delay: i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   }),
 };
+
+const navLinks = [
+  { href: '#problem', label: 'Problem' },
+  { href: '#solution', label: 'Solution' },
+  { href: '#demo', label: 'Demo' },
+  { href: '#features', label: 'Platform' },
+  { href: '#cascade', label: 'Cascade' },
+];
 
 export function Navbar() {
   return (
@@ -31,17 +38,16 @@ export function Navbar() {
           </div>
           <span className="font-display text-xl tracking-tight text-white">Recall</span>
         </Link>
-        <nav className="hidden items-center gap-8 text-sm text-white/60 md:flex">
-          <a href="#features" className="transition hover:text-white">Features</a>
-          <a href="#cascade" className="transition hover:text-white">How it works</a>
-          <a href="#screens" className="transition hover:text-white">Product</a>
-          <a href="#stack" className="transition hover:text-white">Technology</a>
+        <nav className="hidden items-center gap-7 text-sm text-white/55 lg:flex">
+          {navLinks.map((l) => (
+            <a key={l.href} href={l.href} className="transition hover:text-white">
+              {l.label}
+            </a>
+          ))}
         </nav>
         <div className="flex items-center gap-3">
           <a
-            href={YOUTUBE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#demo"
             className="hidden text-sm text-white/55 transition hover:text-white sm:inline"
           >
             Watch demo
@@ -63,15 +69,23 @@ export function Navbar() {
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
       <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
       <div className="pointer-events-none absolute inset-0 bg-grid-fade grid-bg opacity-40" />
+      <div className="pointer-events-none absolute -right-32 top-20 h-[480px] w-[480px] rounded-full bg-recall-violet/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-recall-blue/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-white/70">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-white/70"
+          >
             <Sparkles className="h-3.5 w-3.5 text-recall-blue" />
-            AI-native cognitive care · Built for families
+            AI-native cognitive care for neurodegenerative families
           </motion.div>
 
           <motion.h1
@@ -79,10 +93,10 @@ export function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="font-display text-5xl leading-[1.05] tracking-tight md:text-7xl"
+            className="font-display text-5xl leading-[1.02] tracking-tight md:text-7xl lg:text-[5.25rem]"
           >
-            Catch decline
-            <span className="block text-gradient-accent italic">before crisis.</span>
+            The care system families need
+            <span className="block text-gradient-accent italic">doesn&apos;t exist yet.</span>
           </motion.h1>
 
           <motion.p
@@ -92,10 +106,16 @@ export function Hero() {
             animate="show"
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
           >
-            Recall extends caregivers with Clara — a warm voice companion for Margaret — and Recall AI — a clinical advisor for Susan. One offline-first platform. Real-time cognitive signal. Automatic de-escalation.
+            Recall is the missing layer — Clara for Margaret&apos;s daily dignity, Recall AI for Susan&apos;s real-time signal. One offline-first platform that catches cognitive decline before crisis.
           </motion.p>
 
-          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
             <a
               href={DEMO_URL}
               target="_blank"
@@ -106,20 +126,25 @@ export function Hero() {
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
-              href={YOUTUBE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#demo"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:bg-white/5"
             >
               Watch 6-min walkthrough
             </a>
           </motion.div>
 
-          <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="mt-14 grid grid-cols-3 gap-4 border-t border-white/10 pt-10">
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            className="mt-16 grid grid-cols-2 gap-6 border-t border-white/10 pt-12 md:grid-cols-4"
+          >
             {[
-              { value: '30s', label: 'Someone in the US develops Alzheimer\'s' },
-              { value: '2', label: 'Experiences — patient & caregiver' },
-              { value: '1', label: 'Source of truth for both' },
+              { value: '6.9M', label: 'Americans living with Alzheimer\'s' },
+              { value: '12M', label: 'Unpaid dementia caregivers' },
+              { value: '30s', label: 'Until the next diagnosis' },
+              { value: '1', label: 'Platform for both experiences' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="font-display text-3xl text-white md:text-4xl">{stat.value}</div>
@@ -127,44 +152,6 @@ export function Hero() {
               </div>
             ))}
           </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function ProblemSection() {
-  return (
-    <section className="border-y border-white/5 bg-ink-50/50 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="section-label mb-4">The problem</p>
-            <h2 className="font-display text-4xl leading-tight md:text-5xl">
-              The hardest moments aren&apos;t the diagnosis —
-              <span className="text-white/50"> they&apos;re the quiet afternoons.</span>
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/55">
-              When Mom asks the same question three times, nobody knows until it&apos;s already a crisis. Medication mistakes kill over 100,000 Americans every year. Sundowning turns a normal evening into an ER visit.
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-white/55">
-              Recall listens continuously — scoring cognitive stability, verifying meds on-device, and activating Comfort Mode before panic sets in.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              { icon: Heart, title: 'For Margaret', desc: 'Voice-first companion who knows her name, her meds, and her family photos.' },
-              { icon: Shield, title: 'For Susan', desc: 'Supervisor dashboard with live ACSE, med logs, Clara conversations, and Recall AI briefings.' },
-              { icon: Mic, title: 'Clara', desc: 'Warm ElevenLabs voice. Detects loneliness & confusion. Triggers memory photo shuffle automatically.' },
-              { icon: Brain, title: 'Recall AI', desc: 'Care advisor with full patient context — meds, trends, alerts — in plain English.' },
-            ].map((card) => (
-              <div key={card.title} className="glass group rounded-2xl p-5 transition hover:border-white/20 hover:bg-white/[0.06]">
-                <card.icon className="mb-3 h-5 w-5 text-recall-blue" strokeWidth={1.75} />
-                <h3 className="font-semibold text-white">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/50">{card.desc}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
