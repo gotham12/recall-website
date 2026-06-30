@@ -409,31 +409,45 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Hide rectangular PNG matte on dark pages — flower pixels only */
-.flower-master-img {
-  mix-blend-mode: screen;
-}
-
-.flower-bg-blend {
-  mix-blend-mode: multiply;
-  opacity: 0.9;
-}
-
-.flower-master,
-.flower-master-img,
-.flower-glow {
+/* Bloom hero — GPU-friendly transforms only */
+.flower-bloom-svg {
   will-change: transform, opacity, filter;
 }
 
-.flower-particle {
-  will-change: transform, opacity;
+.flower-glow-pulse {
+  animation: bloom-glow-pulse 4.5s ease-in-out infinite;
+}
+
+@keyframes bloom-glow-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+
+.flower-mote {
+  animation: bloom-mote-rise 5s ease-in-out infinite;
+}
+
+@keyframes bloom-mote-rise {
+  0% { transform: translateY(0); opacity: 0.2; }
+  50% { transform: translateY(-14px); opacity: 0.5; }
+  100% { transform: translateY(-28px); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flower-master,
-  .flower-master-img,
-  .flower-glow,
-  .flower-particle {
+  .flower-bloom-svg {
     will-change: auto;
+  }
+  .flower-glow-pulse,
+  .flower-mote {
+    animation: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .flower-glow-pulse {
+    animation-duration: 6s;
+  }
+  .flower-mote {
+    animation-duration: 6.5s;
   }
 }

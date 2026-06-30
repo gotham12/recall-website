@@ -20,7 +20,7 @@ export const HERO_COPY = {
   headline: 'When the world goes quiet, a name remains.',
   subhead:
     'For the person losing the thread of a day — and the daughter holding the rest together. Recall gives Margaret a voice that remembers, and Susan a signal she can trust.',
-  scrollHint: 'Scroll — the forget-me-not opens, then its petals draw together again.',
+  scrollHint: 'Scroll — and watch memory bloom back into color.',
 } as const;
 
 /** Home stats band — verify figures before major press pushes. */
