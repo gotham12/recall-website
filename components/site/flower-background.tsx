@@ -57,6 +57,7 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
 
         {phase === 'home' && (
           <>
+            {/* Stays dark through the brain-decline sequence; only glows warm during its beat-4 resolve. */}
             <div
               ref={bgBloomRef}
               className="absolute inset-0 opacity-0"

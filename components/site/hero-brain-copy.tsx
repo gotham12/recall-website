@@ -3,14 +3,14 @@
 import AnimatedButton from '@/components/ui/animated-button';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { DEMO_URL, HERO_COPY } from '@/lib/constants';
-import { clamp01, lerp } from '@/lib/bloom-palette';
+import { clamp01, lerp } from '@/lib/brain-palette';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 const HEADLINE_WORDS = HERO_COPY.headline.split(/\s+/);
 const SUBHEAD_WORDS = HERO_COPY.subhead.split(/\s+/);
 
-type HeroBloomCopyProps = {
+type HeroBrainCopyProps = {
   progress: number;
   reducedMotion?: boolean;
   className?: string;
@@ -18,15 +18,20 @@ type HeroBloomCopyProps = {
 
 function wordOpacity(global: number, index: number, total: number, start: number, span: number): number {
   const threshold = start + (index / total) * span;
-  return clamp01((global - threshold) / 0.045);
+  return clamp01((global - threshold) / 0.035);
 }
 
-export function HeroBloomCopy({ progress, reducedMotion = false, className }: HeroBloomCopyProps) {
+/**
+ * Word-by-word reveal, retimed to bloom in during beat 4 of the brain
+ * sequence (the warm crossfade), rather than across the whole scroll.
+ */
+export function HeroBrainCopy({ progress, reducedMotion = false, className }: HeroBrainCopyProps) {
   const p = reducedMotion ? 1 : progress;
-  const taglineP = clamp01((p - 0.02) / 0.08);
-  const subP = clamp01((p - 0.38) / 0.35);
-  const ctaP = clamp01((p - 0.58) / 0.22);
-  const hintP = clamp01((p - 0.72) / 0.18);
+  const taglineP = clamp01((p - 0.7) / 0.1);
+  const headlineP = clamp01((p - 0.78) / 0.16);
+  const subP = clamp01((p - 0.87) / 0.1);
+  const ctaP = clamp01((p - 0.93) / 0.07);
+  const hintP = clamp01((p - 0.97) / 0.03);
 
   return (
     <div className={cn('pointer-events-auto relative z-20 max-w-3xl text-center', className)}>
@@ -43,7 +48,7 @@ export function HeroBloomCopy({ progress, reducedMotion = false, className }: He
 
       <h1 className="font-display text-4xl leading-[1.12] text-white md:text-5xl lg:text-6xl">
         {HEADLINE_WORDS.map((word, i) => {
-          const wo = wordOpacity(p, i, HEADLINE_WORDS.length, 0.1, 0.42);
+          const wo = wordOpacity(headlineP, i, HEADLINE_WORDS.length, 0, 0.8);
           return (
             <span
               key={`${word}-${i}`}
