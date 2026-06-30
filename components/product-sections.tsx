@@ -1,8 +1,8 @@
 'use client';
 
-import ChromaGrid from '@/components/ChromaGrid';
 import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
+import { ScreenshotGrid } from '@/components/site/screenshot-grid';
 import { AgentBentoGrid } from '@/components/ui/agent-bento-grid';
 import AnimatedButton from '@/components/ui/animated-button';
 import ExpandableBentoGrid from '@/components/ui/expandable-bento-grid';
@@ -183,14 +183,17 @@ export function ScreenshotsSection() {
       <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="mb-12 max-w-2xl">
           <p className="section-label mb-4">Product</p>
-          <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl text-white md:!text-5xl">
+          <ScrollReveal
+            containerClassName="!my-0"
+            textClassName="font-display !text-4xl !text-product-950 md:!text-5xl"
+          >
             Designed for dignity.
           </ScrollReveal>
-          <p className="mt-4 text-white/55">
+          <p className="mt-4 text-product-800/70">
             Large touch targets. Warm typography. Voice-first for Margaret. Data-rich for Susan.
           </p>
         </FadeContent>
-        <ChromaGrid items={chromaScreens} className="min-h-[520px]" radius={260} />
+        <ScreenshotGrid items={chromaScreens} columns={3} variant="light" />
       </div>
     </section>
   );

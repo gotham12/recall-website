@@ -1,9 +1,9 @@
 'use client';
 
-import BounceCards from '@/components/BounceCards';
 import AnimatedButton from '@/components/ui/animated-button';
 import { GlowBorderCard } from '@/components/ui/glow-border-card';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import { ScreenshotGrid } from '@/components/site/screenshot-grid';
 import { SpotlightNavbar } from '@/components/ui/spotlight-navbar';
 import { CONTACT_EMAIL, DEMO_URL } from '@/lib/constants';
 import { gmailComposeUrl } from '@/lib/asset-path';
@@ -173,20 +173,15 @@ export function HomeHero() {
         <div className="mt-16 w-full max-w-4xl">
           <PageNavCards />
         </div>
-        <div className="pointer-events-none relative mx-auto mt-20 h-[280px] max-w-lg opacity-90 md:block">
-          <BounceCards
-            className="mx-auto"
-            images={[
-              '/screenshots/patient-clara.png',
-              '/screenshots/supervisor-recall-ai.png',
-              '/screenshots/patient-today.png',
-              '/screenshots/supervisor-acse.png',
-              '/screenshots/patient-meds.png',
+        <div className="relative mx-auto mt-20 w-full max-w-3xl">
+          <ScreenshotGrid
+            columns={3}
+            variant="dark"
+            items={[
+              { image: '/screenshots/patient-clara.png', title: 'Clara', subtitle: 'Patient' },
+              { image: '/screenshots/supervisor-recall-ai.png', title: 'Recall AI', subtitle: 'Supervisor' },
+              { image: '/screenshots/patient-today.png', title: 'Today', subtitle: 'Patient' },
             ]}
-            containerWidth={420}
-            containerHeight={280}
-            animationDelay={0.3}
-            enableHover
           />
         </div>
       </div>

@@ -1,16 +1,18 @@
 'use client';
 
 import BlurText from '@/components/BlurText';
+import GradientText from '@/components/GradientText';
 import ShinyText from '@/components/ShinyText';
 import { AnimatedRays } from '@/components/ui/animated-rays';
-import { Brain } from 'lucide-react';
+import { Brain, Sparkles } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PARTICLE_COUNT = 48;
+const PARTICLE_COUNT = 140;
+const ORB_COLORS = ['#FF6B4A', '#4F8CFF', '#8B5CF6', '#34D399', '#F472B6', '#38BDF8', '#FBBF24'];
 
 export function HeroIntro() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -25,35 +27,57 @@ export function HeroIntro() {
 
     const particles = gsap.utils.toArray<HTMLElement>('.hero-particle', overlay);
     const rings = gsap.utils.toArray<HTMLElement>('.hero-ring', overlay);
+    const blobs = gsap.utils.toArray<HTMLElement>('.hero-blob', overlay);
+    const shards = gsap.utils.toArray<HTMLElement>('.hero-shard', overlay);
 
     const ctx = gsap.context(() => {
-      gsap.to(orb, {
-        rotate: 360,
-        duration: 28,
+      gsap.to(orb, { rotate: 360, duration: 36, repeat: -1, ease: 'none' });
+
+      gsap.to(blobs, {
+        x: () => gsap.utils.random(-80, 80),
+        y: () => gsap.utils.random(-60, 60),
+        scale: () => gsap.utils.random(0.85, 1.2),
+        duration: () => gsap.utils.random(4, 8),
         repeat: -1,
-        ease: 'none',
+        yoyo: true,
+        stagger: 0.3,
+        ease: 'sine.inOut',
       });
 
       gsap.to(rings, {
-        scale: 1.15,
-        opacity: 0.35,
-        duration: 3,
+        scale: 1.2,
+        opacity: 0.5,
+        duration: 4,
         repeat: -1,
         yoyo: true,
-        stagger: 0.4,
+        stagger: 0.35,
         ease: 'sine.inOut',
       });
+
+      gsap.fromTo(
+        shards,
+        { scale: 0, opacity: 0, rotate: -90 },
+        {
+          scale: 1,
+          opacity: 0.75,
+          rotate: 0,
+          duration: 1.4,
+          stagger: { amount: 1.2, from: 'random' },
+          ease: 'back.out(1.8)',
+          delay: 0.2,
+        }
+      );
 
       gsap.fromTo(
         particles,
         { scale: 0, opacity: 0 },
         {
-          scale: 1,
-          opacity: 0.85,
-          duration: 1.2,
-          stagger: { amount: 0.8, from: 'center' },
-          ease: 'back.out(1.4)',
-          delay: 0.15,
+          scale: () => gsap.utils.random(0.6, 1.4),
+          opacity: () => gsap.utils.random(0.5, 1),
+          duration: 1.6,
+          stagger: { amount: 1.4, from: 'random' },
+          ease: 'elastic.out(1, 0.65)',
+          delay: 0.1,
         }
       );
 
@@ -61,8 +85,8 @@ export function HeroIntro() {
         scrollTrigger: {
           trigger: root,
           start: 'top top',
-          end: '+=130%',
-          scrub: 1.1,
+          end: '+=280%',
+          scrub: 1.4,
           pin: overlay,
         },
       });
@@ -71,55 +95,83 @@ export function HeroIntro() {
         particles,
         {
           opacity: 0,
-          scale: 0.2,
-          x: () => gsap.utils.random(-220, 220),
-          y: () => gsap.utils.random(-180, 180),
-          rotate: () => gsap.utils.random(-180, 180),
-          filter: 'blur(12px)',
-          stagger: { amount: 0.6, from: 'random' },
-          ease: 'power3.in',
+          scale: 0.1,
+          x: () => gsap.utils.random(-320, 320),
+          y: () => gsap.utils.random(-280, 280),
+          rotate: () => gsap.utils.random(-240, 240),
+          filter: 'blur(16px) hue-rotate(90deg)',
+          stagger: { amount: 1.2, from: 'random' },
+          ease: 'power4.in',
         },
         0
       )
         .to(
-          rings,
+          shards,
           {
             opacity: 0,
-            scale: 1.8,
-            filter: 'blur(20px)',
-            stagger: 0.08,
+            scale: 2.2,
+            rotate: () => gsap.utils.random(-180, 180),
+            filter: 'blur(24px)',
+            stagger: 0.04,
+            ease: 'power3.in',
+          },
+          0
+        )
+        .to(
+          blobs,
+          {
+            opacity: 0,
+            scale: 2.5,
+            filter: 'blur(40px)',
+            stagger: 0.1,
             ease: 'power2.in',
           },
           0
+        )
+        .to(
+          rings,
+          {
+            opacity: 0,
+            scale: 2.4,
+            filter: 'blur(28px)',
+            stagger: 0.08,
+            ease: 'power2.in',
+          },
+          0.05
         )
         .to(
           orb,
           {
             opacity: 0,
-            scale: 0.4,
-            y: -80,
-            filter: 'blur(16px)',
-            ease: 'power3.in',
+            scale: 0.2,
+            y: -120,
+            rotate: 180,
+            filter: 'blur(20px) brightness(2)',
+            ease: 'power4.in',
           },
-          0.05
+          0.08
         )
         .to(
           '.hero-intro-copy',
           {
             opacity: 0,
-            y: -60,
-            filter: 'blur(8px)',
-            ease: 'power2.in',
+            y: -100,
+            scale: 0.85,
+            filter: 'blur(12px)',
+            ease: 'power3.in',
           },
           0
         )
         .to(
-          overlay,
+          '.hero-aurora-sweep',
           {
-            pointerEvents: 'none',
+            opacity: 0,
+            scale: 1.8,
+            ease: 'power2.in',
           },
-          0.85
-        );
+          0.2
+        )
+        .to(overlay, { pointerEvents: 'none' }, 0.9);
     }, root);
 
     return () => ctx.revert();
@@ -129,51 +181,92 @@ export function HeroIntro() {
     <div ref={rootRef} className="relative">
       <div
         ref={overlayRef}
-        className="relative z-20 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-ink px-6"
+        className="relative z-20 flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-ink"
       >
-        <AnimatedRays className="absolute inset-0 opacity-40" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(79,140,255,0.22),transparent_55%)]" />
+        <AnimatedRays className="absolute inset-0 opacity-60" />
 
-        {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
-          <span
-            key={i}
-            className="hero-particle absolute h-1.5 w-1.5 rounded-full"
+        <div className="hero-aurora-sweep pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,107,74,0.35),transparent_42%),radial-gradient(circle_at_80%_15%,rgba(79,140,255,0.35),transparent_40%),radial-gradient(circle_at_50%_80%,rgba(52,211,153,0.28),transparent_45%),radial-gradient(circle_at_70%_60%,rgba(139,92,246,0.3),transparent_38%)]" />
+
+        {ORB_COLORS.map((color, i) => (
+          <div
+            key={color}
+            className="hero-blob absolute rounded-full blur-3xl"
             style={{
-              left: `${8 + ((i * 17) % 84)}%`,
-              top: `${10 + ((i * 23) % 78)}%`,
-              background:
-                i % 3 === 0 ? '#4F8CFF' : i % 3 === 1 ? '#8B5CF6' : '#34D399',
-              boxShadow: '0 0 12px rgba(79,140,255,0.45)',
+              width: `${180 + i * 40}px`,
+              height: `${180 + i * 40}px`,
+              left: `${5 + i * 13}%`,
+              top: `${8 + ((i * 17) % 70)}%`,
+              background: color,
+              opacity: 0.22,
             }}
           />
         ))}
 
-        <div className="hero-ring absolute h-56 w-56 rounded-full border border-recall-blue/30 md:h-72 md:w-72" />
-        <div className="hero-ring absolute h-80 w-80 rounded-full border border-recall-violet/20 md:h-[22rem] md:w-[22rem]" />
-        <div className="hero-ring absolute h-[28rem] w-[28rem] rounded-full border border-recall-mint/10" />
+        {Array.from({ length: 24 }).map((_, i) => (
+          <div
+            key={`shard-${i}`}
+            className="hero-shard absolute h-px w-24 origin-center"
+            style={{
+              left: `${(i * 41) % 100}%`,
+              top: `${(i * 29) % 100}%`,
+              rotate: `${i * 15}deg`,
+              background: `linear-gradient(90deg, transparent, ${ORB_COLORS[i % ORB_COLORS.length]}, transparent)`,
+            }}
+          />
+        ))}
 
-        <div ref={orbRef} className="relative mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-gradient-to-br from-recall-blue to-recall-violet shadow-[0_0_80px_rgba(79,140,255,0.45)] md:h-28 md:w-28">
-          <Brain className="h-12 w-12 text-white md:h-14 md:w-14" strokeWidth={1.5} />
+        {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
+          <span
+            key={i}
+            className="hero-particle absolute rounded-full"
+            style={{
+              width: `${2 + (i % 5)}px`,
+              height: `${2 + (i % 5)}px`,
+              left: `${(i * 7.3) % 96}%`,
+              top: `${(i * 11.7) % 92}%`,
+              background: ORB_COLORS[i % ORB_COLORS.length],
+              boxShadow: `0 0 ${8 + (i % 6) * 2}px ${ORB_COLORS[i % ORB_COLORS.length]}`,
+            }}
+          />
+        ))}
+
+        <div className="hero-ring absolute h-64 w-64 rounded-full border-2 border-recall-coral/40 md:h-80 md:w-80" />
+        <div className="hero-ring absolute h-96 w-96 rounded-full border border-recall-blue/35 md:h-[28rem] md:w-[28rem]" />
+        <div className="hero-ring absolute h-[32rem] w-[32rem] rounded-full border border-recall-violet/25" />
+        <div className="hero-ring absolute h-[40rem] w-[40rem] rounded-full border border-recall-mint/15" />
+
+        <div
+          ref={orbRef}
+          className="relative mb-10 flex h-28 w-28 items-center justify-center rounded-[2rem] bg-gradient-to-br from-recall-coral via-recall-violet to-recall-blue shadow-[0_0_120px_rgba(139,92,246,0.55)] md:h-32 md:w-32"
+        >
+          <Brain className="h-14 w-14 text-white md:h-16 md:w-16" strokeWidth={1.5} />
+          <Sparkles className="absolute -right-2 -top-2 h-6 w-6 text-recall-mint" />
         </div>
 
-        <div className="hero-intro-copy relative z-10 max-w-3xl text-center">
+        <div className="hero-intro-copy relative z-10 max-w-4xl px-6 text-center">
           <BlurText
             text="Recall"
-            className="font-display justify-center text-6xl text-white md:text-8xl"
+            className="font-display justify-center text-7xl text-white md:text-9xl"
             animateBy="letters"
-            delay={50}
+            delay={40}
             threshold={0}
             rootMargin="0px"
           />
+          <div className="mt-5">
+            <GradientText
+              colors={['#FF6B4A', '#4F8CFF', '#34D399', '#F472B6', '#38BDF8']}
+              animationSpeed={4}
+              className="font-display text-2xl italic md:text-4xl"
+            >
+              Cognitive care that listens before crisis.
+            </GradientText>
+          </div>
           <ShinyText
-            text="Cognitive care that listens before crisis."
-            className="mx-auto mt-4 max-w-xl text-lg text-white/70 md:text-xl"
-            color="#cbd5e1"
+            text="A living story — from weight to lift."
+            className="mx-auto mt-6 max-w-2xl text-base md:text-lg"
+            color="#e2e8f0"
             shineColor="#ffffff"
           />
-          <p className="mt-8 animate-bounce text-xs uppercase tracking-[0.35em] text-white/40">
-            Scroll to enter
-          </p>
         </div>
       </div>
     </div>
