@@ -107,12 +107,11 @@ export function ResearchProblemSection() {
         ]}
         velocity={80}
         className="text-base font-medium uppercase tracking-[0.2em] text-zinc-500 md:text-lg"
-        parallaxClassName="border-y border-zinc-800/80 bg-zinc-950/90 py-5"
+        parallaxClassName="border-y border-zinc-800/50 bg-black/35 py-5 backdrop-blur-md"
       />
 
-      <section id="problem" className="relative overflow-hidden bg-zinc-950 py-28 md:py-36">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,120,130,0.08),transparent_55%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black" />
+      <section id="problem" className="relative overflow-hidden py-28 md:py-36">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,120,130,0.06),transparent_55%)]" />
 
         <div className="relative mx-auto max-w-6xl px-6">
           <FadeContent blur className="max-w-4xl">

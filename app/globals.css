@@ -238,7 +238,7 @@ body {
 /* Emotional color journey — problem (dark) vs product (bright) */
 .theme-problem {
   color-scheme: dark;
-  background-color: #050506;
+  background-color: transparent;
 }
 
 .theme-problem .section-label {
@@ -409,11 +409,20 @@ body {
   transform-style: preserve-3d;
 }
 
-.flower-petal-wrap,
-.flower-petal,
-.flower-bloom-photo,
-.flower-bud {
-  will-change: transform, opacity;
+/* Hide rectangular PNG matte on dark pages — flower pixels only */
+.flower-master-img {
+  mix-blend-mode: screen;
+}
+
+.flower-bg-blend {
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.flower-master,
+.flower-master-img,
+.flower-glow {
+  will-change: transform, opacity, filter;
 }
 
 .flower-particle {
@@ -421,10 +430,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flower-svg .flower-petal,
-  .flower-svg .flower-bud,
-  .flower-svg .flower-center,
-  .flower-svg .flower-glow,
+  .flower-master,
+  .flower-master-img,
+  .flower-glow,
   .flower-particle {
     will-change: auto;
   }

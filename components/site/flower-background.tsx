@@ -136,45 +136,61 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
         {/* Problem — gloomy neurodegenerative brain atmosphere */}
         {phase === 'problem' && (
           <div className="absolute inset-0">
-            <AssetImage
-              src={PAGE_BACKGROUNDS.problemBrain}
-              alt=""
-              fill
-              priority
-              className="object-cover object-center scale-105"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-zinc-950/88 to-black/95" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_40%,transparent_0%,rgba(0,0,0,0.72)_100%)]" />
+            <div className="relative h-full w-full">
+              <AssetImage
+                src={PAGE_BACKGROUNDS.problemBrain}
+                alt=""
+                fill
+                priority
+                className="object-cover object-center brightness-[0.95] contrast-[1.08] saturate-[0.85]"
+                sizes="100vw"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-zinc-950/60 to-black/80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_35%,transparent_0%,rgba(0,0,0,0.45)_100%)]" />
           </div>
         )}
 
         {/* Product — hyperrealistic forget-me-not photographic background */}
         {phase === 'product' && (
           <div className="absolute inset-0">
-            <AssetImage
-              src={PAGE_BACKGROUNDS.productFlower}
-              alt=""
-              fill
-              priority
-              className="object-cover object-center opacity-[0.38] saturate-[1.15] scale-110"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-product-50/92 via-white/78 to-recall-mint/25" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.65),transparent_70%)]" />
+            <div
+              className="relative h-full w-full opacity-[0.42] saturate-[1.1]"
+              style={{
+                maskImage: 'radial-gradient(ellipse 85% 70% at 50% 40%, black 15%, transparent 72%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 85% 70% at 50% 40%, black 15%, transparent 72%)',
+              }}
+            >
+              <AssetImage
+                src={PAGE_BACKGROUNDS.productFlower}
+                alt=""
+                fill
+                priority
+                className="flower-bg-blend object-cover object-center scale-110"
+                sizes="100vw"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-product-50/88 via-white/75 to-recall-mint/20" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.55),transparent_70%)]" />
           </div>
         )}
 
-        {/* Home — subtle photographic bloom wash behind scroll hero */}
+        {/* Home — subtle photographic wash behind scroll hero */}
         {phase === 'home' && (
           <>
-            <div className="absolute inset-0 opacity-[0.07]">
+            <div
+              className="absolute inset-0 opacity-[0.06]"
+              style={{
+                maskImage: 'radial-gradient(circle at 50% 40%, black, transparent 68%)',
+                WebkitMaskImage: 'radial-gradient(circle at 50% 40%, black, transparent 68%)',
+              }}
+            >
               <div className="relative h-full w-full">
                 <AssetImage
-                  src={HERO_FLOWER.bloom}
+                  src={HERO_FLOWER.image}
                   alt=""
                   fill
-                  className="object-cover object-center blur-sm scale-110"
+                  className="flower-bg-blend object-cover object-center blur-sm scale-110"
                   sizes="100vw"
                 />
               </div>

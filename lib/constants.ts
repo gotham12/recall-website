@@ -179,11 +179,11 @@ export const TEAM = [
 ] as const;
 
 export const HERO_FLOWER = {
-  bud: '/screenshots/flower-forget-me-not-bud.png',
-  bloom: '/screenshots/flower-forget-me-not-bloom.png',
+  /** Single hyperrealistic forget-me-not — used for hero animation and product backdrop */
+  image: '/screenshots/flower-forget-me-not.png',
 } as const;
 
 export const PAGE_BACKGROUNDS = {
   problemBrain: '/screenshots/problem-brain-atmosphere.png',
-  productFlower: '/screenshots/flower-forget-me-not-bloom.png',
+  productFlower: '/screenshots/flower-forget-me-not.png',
 } as const;
