@@ -1,30 +1,37 @@
 'use client';
 
 import { useState } from 'react';
+import FadeContent from '@/components/FadeContent';
+import ScrollReveal from '@/components/ScrollReveal';
+import { GlowBorderCard } from '@/components/ui/glow-border-card';
 import { Play } from 'lucide-react';
-import { FadeUp, GlowOrb, SectionHeader } from './primitives';
-
-const VIDEO_ID = 'Xh_k-GUBmmA';
+import { VIDEO_ID } from '@/lib/constants';
 
 export function DemoVideoSection() {
   const [playing, setPlaying] = useState(false);
 
   return (
     <section id="demo" className="relative overflow-hidden py-24 md:py-32">
-      <GlowOrb className="left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 bg-recall-violet/10" />
-
       <div className="relative mx-auto max-w-5xl px-6">
-        <FadeUp>
-          <SectionHeader
-            align="center"
-            label="Product demo"
-            title="See Recall in action"
-            description="Six minutes with Margaret and Susan — Clara voice, med verification, ACSE scoring, Comfort Mode, and Recall AI. No new tab required."
-          />
-        </FadeUp>
+        <FadeContent blur className="mx-auto max-w-3xl text-center">
+          <p className="section-label mb-4">Product demo</p>
+          <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl text-white md:!text-5xl">
+            See Recall in action
+          </ScrollReveal>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/55">
+            Six minutes with Margaret and Susan — Clara voice, med verification, ACSE scoring, Comfort Mode, and Recall
+            AI. No new tab required.
+          </p>
+        </FadeContent>
 
-        <FadeUp delay={0.12} className="mt-12">
-          <div className="video-shell relative overflow-hidden rounded-3xl border border-white/10 bg-ink-200 shadow-2xl shadow-recall-blue/10">
+        <FadeContent blur threshold={0.15} className="mt-12">
+          <GlowBorderCard
+            width="100%"
+            aspectRatio="16/9"
+            borderRadius="1.5rem"
+            colorPreset="aurora"
+            className="overflow-hidden border-white/10 bg-ink-200 shadow-2xl shadow-recall-blue/10"
+          >
             {!playing ? (
               <button
                 type="button"
@@ -57,11 +64,12 @@ export function DemoVideoSection() {
                 />
               </div>
             )}
-          </div>
+          </GlowBorderCard>
           <p className="mt-4 text-center text-xs text-white/35">
-            Margaret Chen demo · No password · Supervisor password: <span className="font-mono text-white/50">care</span>
+            Margaret Chen demo · No password · Supervisor password:{' '}
+            <span className="font-mono text-white/50">care</span>
           </p>
-        </FadeUp>
+        </FadeContent>
       </div>
     </section>
   );

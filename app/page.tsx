@@ -2,7 +2,7 @@ import {
   CascadeSection,
   CTASection,
   FeaturesBento,
-  Footer,
+  SiteFooter,
   ScreenshotsSection,
   StackSection,
 } from '@/components/product-sections';
@@ -26,7 +26,7 @@ export default function Home() {
       <ScreenshotsSection />
       <StackSection />
       <CTASection />
-      <Footer />
+      <SiteFooter />
     </main>
   );
 }
