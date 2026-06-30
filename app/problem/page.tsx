@@ -7,7 +7,7 @@ import { Navbar } from '@/components/site/navbar';
 
 export default function ProblemPage() {
   return (
-    <main className="theme-problem relative min-h-screen bg-zinc-950 text-zinc-100">
+    <main className="theme-problem relative min-h-screen text-zinc-100">
       <FlowerBackground phase="problem" />
       <div className="relative z-10">
         <Navbar tone="dark" />

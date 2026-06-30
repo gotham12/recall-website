@@ -405,10 +405,14 @@ body {
 }
 
 /* SVG peony — GPU-friendly petal transforms */
-.flower-svg .flower-petal,
-.flower-svg .flower-bud,
-.flower-svg .flower-center,
-.flower-svg .flower-glow {
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.flower-petal-wrap,
+.flower-petal,
+.flower-bloom-photo,
+.flower-bud {
   will-change: transform, opacity;
 }
 

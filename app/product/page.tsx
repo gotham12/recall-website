@@ -16,7 +16,7 @@ import { Navbar } from '@/components/site/navbar';
 
 export default function ProductPage() {
   return (
-    <main className="theme-product relative min-h-screen bg-product-50 text-product-950">
+    <main className="theme-product relative min-h-screen text-product-950">
       <FlowerBackground phase="product" />
       <div className="relative z-10">
         <Navbar tone="light" />

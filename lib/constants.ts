@@ -20,7 +20,7 @@ export const HERO_COPY = {
   headline: 'When the world goes quiet, a name remains.',
   subhead:
     'For the person losing the thread of a day — and the daughter holding the rest together. Recall gives Margaret a voice that remembers, and Susan a signal she can trust.',
-  scrollHint: 'Scroll — the flower opens as memory returns.',
+  scrollHint: 'Scroll — the forget-me-not opens, then its petals draw together again.',
 } as const;
 
 /** Home stats band — verify figures before major press pushes. */
@@ -179,6 +179,11 @@ export const TEAM = [
 ] as const;
 
 export const HERO_FLOWER = {
-  bud: '/screenshots/flower-bud-closed.png',
-  bloom: '/screenshots/flower-peony-hyperreal.png',
+  bud: '/screenshots/flower-forget-me-not-bud.png',
+  bloom: '/screenshots/flower-forget-me-not-bloom.png',
+} as const;
+
+export const PAGE_BACKGROUNDS = {
+  problemBrain: '/screenshots/problem-brain-atmosphere.png',
+  productFlower: '/screenshots/flower-forget-me-not-bloom.png',
 } as const;

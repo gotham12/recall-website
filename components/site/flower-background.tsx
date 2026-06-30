@@ -2,17 +2,17 @@
 
 import AnimatedButton from '@/components/ui/animated-button';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import { AssetImage } from '@/components/site/asset-image';
 import {
   applyBloomProgress,
-  applyWiltProgress,
+  applyCloseProgress,
   initClosedState,
-  initWiltedState,
   prefersReducedMotion,
   resetAmbientMotion,
   startAmbientMotion,
 } from '@/components/site/flower-animation';
 import { FlowerScene } from '@/components/site/flower-scene';
-import { DEMO_URL, HERO_COPY } from '@/lib/constants';
+import { DEMO_URL, HERO_COPY, HERO_FLOWER, PAGE_BACKGROUNDS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -32,7 +32,6 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
   const openingRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const heroStageRef = useRef<HTMLDivElement>(null);
-  const ambientStageRef = useRef<HTMLDivElement>(null);
   const bgBloomRef = useRef<HTMLDivElement>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [reducedBloom, setReducedBloom] = useState(0);
@@ -48,113 +47,76 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
   useEffect(() => {
     const root = rootRef.current;
     const heroStage = heroStageRef.current;
-    const ambientStage = ambientStageRef.current;
     const bgBloom = bgBloomRef.current;
-    if (!root || !ambientStage) return;
+    if (!root) return;
 
     resetAmbientMotion();
 
     const ctx = gsap.context(() => {
+      if (phase !== 'home') return;
+
       if (reducedMotion) {
-        if (phase === 'home' && openingRef.current && pinRef.current) {
-          ScrollTrigger.create({
-            trigger: openingRef.current,
-            start: 'top top',
-            end: '+=220%',
-            pin: pinRef.current,
-            scrub: 0.6,
-            onUpdate: (self) => {
-              const bloomP = gsap.utils.clamp(0, 1, self.progress / 0.45);
-              const wiltP = gsap.utils.clamp(0, 1, (self.progress - 0.55) / 0.45);
-              setReducedBloom(bloomP >= 0.5 && wiltP < 0.35 ? 1 : bloomP >= 0.5 ? 1 : 0);
-              gsap.set('.hero-opening-copy', {
-                opacity: 1 - wiltP,
-                y: wiltP * -40,
-              });
-              if (bgBloom) gsap.set(bgBloom, { opacity: gsap.utils.interpolate(0, 0.55, bloomP) });
-            },
-          });
-        }
-        return;
-      }
-
-      initClosedState(ambientStage);
-      gsap.set(ambientStage, { scale: phase === 'problem' ? 1.2 : 1.35, opacity: phase === 'problem' ? 0.14 : 0.2 });
-
-      if (phase === 'home' && heroStage && openingRef.current && pinRef.current) {
-        initClosedState(heroStage);
-        if (bgBloom) gsap.set(bgBloom, { opacity: 0 });
-
-        let ambientRunning = false;
-
+        if (!openingRef.current || !pinRef.current || !heroStage) return;
         ScrollTrigger.create({
           trigger: openingRef.current,
           start: 'top top',
-          end: '+=280%',
+          end: '+=240%',
           pin: pinRef.current,
-          scrub: 1.1,
+          scrub: 0.6,
           onUpdate: (self) => {
-            const bloomEnd = 0.48;
-            const bloomP = gsap.utils.clamp(0, 1, self.progress / bloomEnd);
-            const wiltP = gsap.utils.clamp(0, 1, (self.progress - bloomEnd) / (1 - bloomEnd));
-
-            applyBloomProgress(heroStage, bloomP);
-            applyBloomProgress(ambientStage, bloomP * 0.92);
-
-            if (bgBloom) {
-              gsap.set(bgBloom, {
-                opacity: gsap.utils.interpolate(0, 0.62, bloomP),
-              });
-            }
-
-            gsap.set('.hero-opening-copy', {
-              opacity: gsap.utils.clamp(0.85, 1, 0.85 + bloomP * 0.15) * (1 - wiltP),
-              y: gsap.utils.interpolate(bloomP * 4, -48, wiltP),
-              filter: wiltP > 0.2 ? `blur(${wiltP * 8}px)` : 'blur(0px)',
-            });
-
-            if (wiltP > 0.02) {
-              applyWiltProgress(heroStage, wiltP);
-              applyWiltProgress(ambientStage, wiltP * 1.05);
-              gsap.set(ambientStage, {
-                opacity: gsap.utils.interpolate(0.2, 0.08, wiltP),
-              });
-            } else if (bloomP >= 0.98 && !ambientRunning) {
-              ambientRunning = true;
-              startAmbientMotion(heroStage);
-              startAmbientMotion(ambientStage);
-            }
+            const openP = gsap.utils.clamp(0, 1, self.progress / 0.42);
+            const closeP = gsap.utils.clamp(0, 1, (self.progress - 0.5) / 0.5);
+            setReducedBloom(openP >= 0.5 && closeP < 0.4 ? 1 : 0);
+            gsap.set('.hero-opening-copy', { opacity: 1 - closeP * 0.85, y: closeP * -36 });
+            if (bgBloom) gsap.set(bgBloom, { opacity: gsap.utils.interpolate(0, 0.5, openP) * (1 - closeP) });
           },
         });
+        return;
       }
 
-      if (phase === 'problem') {
-        initWiltedState(ambientStage);
-        gsap.set(ambientStage, {
-          scale: 1.2,
-          opacity: 0.12,
-        });
-      }
+      if (!heroStage || !openingRef.current || !pinRef.current) return;
 
-      if (phase === 'product') {
-        initClosedState(ambientStage);
-        gsap.set(ambientStage, { filter: 'grayscale(0.35) brightness(0.75)', opacity: 0.18 });
+      initClosedState(heroStage);
+      if (bgBloom) gsap.set(bgBloom, { opacity: 0 });
 
-        const tl = gsap.timeline({ delay: 0.2 });
-        tl.call(() => applyBloomProgress(ambientStage, 0));
-        tl.to(
-          {},
-          {
-            duration: 2.4,
-            ease: 'none',
-            onUpdate: function () {
-              applyBloomProgress(ambientStage, this.progress());
-            },
+      let ambientRunning = false;
+
+      ScrollTrigger.create({
+        trigger: openingRef.current,
+        start: 'top top',
+        end: '+=300%',
+        pin: pinRef.current,
+        scrub: 1.1,
+        onUpdate: (self) => {
+          const openEnd = 0.46;
+          const openP = gsap.utils.clamp(0, 1, self.progress / openEnd);
+          const closeP = gsap.utils.clamp(0, 1, (self.progress - openEnd) / (1 - openEnd));
+
+          if (closeP <= 0.01) {
+            applyBloomProgress(heroStage, openP);
+          } else {
+            applyBloomProgress(heroStage, 1);
+            applyCloseProgress(heroStage, closeP);
           }
-        );
-        tl.call(() => startAmbientMotion(ambientStage), [], '-=0.2');
-        tl.to(ambientStage, { opacity: 0.28, duration: 1.2 }, '-=0.8');
-      }
+
+          if (bgBloom) {
+            gsap.set(bgBloom, {
+              opacity: gsap.utils.interpolate(0, 0.55, openP) * (1 - closeP * 0.9),
+            });
+          }
+
+          gsap.set('.hero-opening-copy', {
+            opacity: gsap.utils.clamp(0.88, 1, 0.88 + openP * 0.12) * (1 - closeP * 0.9),
+            y: gsap.utils.interpolate(openP * 3, -42, closeP),
+            filter: closeP > 0.25 ? `blur(${closeP * 6}px)` : 'blur(0px)',
+          });
+
+          if (openP >= 0.98 && closeP < 0.02 && !ambientRunning) {
+            ambientRunning = true;
+            startAmbientMotion(heroStage);
+          }
+        },
+      });
     }, root);
 
     return () => {
@@ -167,38 +129,63 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
     <div ref={rootRef} aria-hidden className="pointer-events-none">
       <div
         className={cn(
-          'fixed inset-0 z-0 overflow-hidden transition-colors duration-700',
-          phase === 'problem' && 'bg-gradient-to-b from-zinc-950 via-zinc-950 to-black',
-          phase === 'product' && 'bg-gradient-to-b from-product-50/80 via-white/50 to-recall-mint/10',
-          phase === 'home' && 'bg-gradient-to-b from-[#030508] via-ink to-ink-50/80'
+          'fixed inset-0 z-0 overflow-hidden',
+          phase === 'home' && 'bg-gradient-to-b from-[#020408] via-ink to-ink-50/90'
         )}
       >
-        {/* Background brightens as bloom completes (home) */}
-        {phase === 'home' && (
-          <div
-            ref={bgBloomRef}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(253,164,175,0.14),rgba(79,140,255,0.06)_45%,transparent_70%)] opacity-0"
-          />
+        {/* Problem — gloomy neurodegenerative brain atmosphere */}
+        {phase === 'problem' && (
+          <div className="absolute inset-0">
+            <AssetImage
+              src={PAGE_BACKGROUNDS.problemBrain}
+              alt=""
+              fill
+              priority
+              className="object-cover object-center scale-105"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-zinc-950/88 to-black/95" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_40%,transparent_0%,rgba(0,0,0,0.72)_100%)]" />
+          </div>
         )}
 
-        <div className="absolute inset-0 flex items-center justify-center pt-[8vh]">
-          <FlowerScene
-            ref={ambientStageRef}
-            size="ambient"
-            reducedMotion={reducedMotion}
-            reducedBloomProgress={reducedBloom}
-            className="opacity-100"
-          />
-        </div>
+        {/* Product — hyperrealistic forget-me-not photographic background */}
+        {phase === 'product' && (
+          <div className="absolute inset-0">
+            <AssetImage
+              src={PAGE_BACKGROUNDS.productFlower}
+              alt=""
+              fill
+              priority
+              className="object-cover object-center opacity-[0.38] saturate-[1.15] scale-110"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-product-50/92 via-white/78 to-recall-mint/25" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.65),transparent_70%)]" />
+          </div>
+        )}
 
-        <div
-          className={cn(
-            'absolute inset-0',
-            phase === 'problem' && 'bg-[radial-gradient(circle_at_50%_40%,transparent_20%,rgba(0,0,0,0.55)_100%)]',
-            phase === 'product' && 'bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.55),transparent_65%)]',
-            phase === 'home' && 'bg-[radial-gradient(circle_at_50%_38%,transparent_22%,rgba(7,11,20,0.78)_100%)]'
-          )}
-        />
+        {/* Home — subtle photographic bloom wash behind scroll hero */}
+        {phase === 'home' && (
+          <>
+            <div className="absolute inset-0 opacity-[0.07]">
+              <div className="relative h-full w-full">
+                <AssetImage
+                  src={HERO_FLOWER.bloom}
+                  alt=""
+                  fill
+                  className="object-cover object-center blur-sm scale-110"
+                  sizes="100vw"
+                />
+              </div>
+            </div>
+            <div
+              ref={bgBloomRef}
+              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(56,189,248,0.12),rgba(125,211,252,0.05)_45%,transparent_72%)] opacity-0"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_20%,rgba(7,11,20,0.82)_100%)]" />
+          </>
+        )}
       </div>
 
       {phase === 'home' && (
@@ -213,7 +200,7 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
               reducedMotion={reducedMotion}
               reducedBloomProgress={reducedBloom}
             />
-            <div className="hero-opening-copy pointer-events-auto relative z-20 mt-6 max-w-3xl text-center md:mt-8">
+            <div className="hero-opening-copy pointer-events-auto relative z-20 mt-4 max-w-3xl text-center md:mt-6">
               <p className="mb-4 font-display text-sm uppercase tracking-[0.22em] text-white/40">Recall</p>
               <h1 className="font-display text-4xl leading-[1.08] text-white md:text-5xl lg:text-6xl">
                 {HERO_COPY.headline}
@@ -228,7 +215,7 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
                   </AnimatedButton>
                 </a>
                 <Link href="/#demo">
-                  <InteractiveHoverButton className="border-recall-coral/25 bg-recall-coral/10 px-8 text-white">
+                  <InteractiveHoverButton className="border-sky-400/30 bg-sky-400/10 px-8 text-white">
                     Watch the demo
                   </InteractiveHoverButton>
                 </Link>
