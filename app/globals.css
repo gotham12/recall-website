@@ -403,3 +403,25 @@ body {
     @apply font-sans;
   }
 }
+
+/* SVG peony — GPU-friendly petal transforms */
+.flower-svg .flower-petal,
+.flower-svg .flower-bud,
+.flower-svg .flower-center,
+.flower-svg .flower-glow {
+  will-change: transform, opacity;
+}
+
+.flower-particle {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flower-svg .flower-petal,
+  .flower-svg .flower-bud,
+  .flower-svg .flower-center,
+  .flower-svg .flower-glow,
+  .flower-particle {
+    will-change: auto;
+  }
+}

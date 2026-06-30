@@ -2,7 +2,8 @@
 
 import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
-import { VIDEO_ID } from '@/lib/constants';
+import { CONTACT_EMAIL, VIDEO_ID } from '@/lib/constants';
+import { gmailComposeUrl } from '@/lib/asset-path';
 import { cn } from '@/lib/utils';
 
 export function DemoVideoSection({ bright = false }: { bright?: boolean }) {
@@ -51,9 +52,20 @@ export function DemoVideoSection({ bright = false }: { bright?: boolean }) {
           </div>
         </div>
 
-        <p className={cn('mt-4 text-center text-xs', bright ? 'text-product-800/45' : 'text-white/35')}>
-          Margaret Chen demo · No password · Supervisor password:{' '}
-          <span className={cn('font-mono', bright ? 'text-product-800/65' : 'text-white/50')}>care</span>
+        <p className={cn('mt-4 text-center text-sm md:text-base', bright ? 'text-product-800/55' : 'text-white/45')}>
+          Want hands-on demo access?{' '}
+          <a
+            href={gmailComposeUrl(CONTACT_EMAIL, {
+              subject: 'Recall — Request demo access',
+              body: 'Hi — I would like private credentials for the Recall live demo.',
+            })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn('font-medium underline-offset-2 hover:underline', bright ? 'text-recall-blue' : 'text-recall-sky')}
+          >
+            Email us
+          </a>{' '}
+          and we&apos;ll send access details directly.
         </p>
       </div>
     </section>

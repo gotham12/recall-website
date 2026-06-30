@@ -1,5 +1,6 @@
 import { ResearchProblemSection } from '@/components/research-problem';
 import { ProblemBridge } from '@/components/site/problem-bridge';
+import { DevLinksSection } from '@/components/site/dev-links';
 import { FlowerBackground } from '@/components/site/flower-background';
 import { SiteFooter } from '@/components/product-sections';
 import { Navbar } from '@/components/site/navbar';
@@ -12,6 +13,7 @@ export default function ProblemPage() {
         <Navbar tone="dark" />
         <ResearchProblemSection />
         <ProblemBridge />
+        <DevLinksSection />
         <SiteFooter variant="dark" />
       </div>
     </main>

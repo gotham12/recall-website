@@ -149,16 +149,16 @@ export function HomeHero() {
   return (
     <section className="relative min-h-[70vh] overflow-hidden pt-28 md:pt-32">
       <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-6 py-16 text-center">
-        <p className="mb-6 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/60">
-          A two-chapter story
+        <p className="mb-6 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/60 md:text-sm">
+          Go deeper — two chapters
         </p>
-        <h1 className="font-display max-w-4xl text-5xl leading-[1.02] md:text-7xl">
+        <h1 className="font-display max-w-4xl text-4xl leading-[1.02] md:text-6xl">
           Feel the weight of the problem.
           <span className="mt-2 block text-gradient-accent italic">Then feel the lift of the product.</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60">
-          Recall guides families from crisis to clarity — darker tones when describing the gap, brighter tones when
-          introducing Clara, Recall AI, and the ACSE engine.
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60 md:text-xl">
+          Already know the pitch? Dive into the full narrative — dark tones for the gap families face, brighter tones
+          when Clara, Recall AI, and ACSE enter the story.
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Link href="/problem/">

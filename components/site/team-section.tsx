@@ -4,7 +4,7 @@ import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
 import SpotlightCard from '@/components/SpotlightCard';
 import { AssetImage } from '@/components/site/asset-image';
-import { TEAM } from '@/lib/constants';
+import { TEAM, FOUNDERS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 export function TeamSection({ bright = false }: { bright?: boolean }) {
@@ -22,7 +22,7 @@ export function TeamSection({ bright = false }: { bright?: boolean }) {
           Built by caregivers&apos; children who watched the system fail.
         </ScrollReveal>
         <p className={cn('mt-5 max-w-2xl text-lg md:text-xl', bright ? 'text-product-800/70' : 'text-white/55')}>
-          Recall is led by two co-founders combining clinical empathy with production-grade AI engineering.
+          {FOUNDERS.creditLine}. Clinical empathy meets production-grade AI engineering.
         </p>
       </FadeContent>
 
@@ -64,8 +64,7 @@ export function TeamSection({ bright = false }: { bright?: boolean }) {
                 <p
                   className={cn(
                     'text-base leading-relaxed md:text-lg',
-                    bright ? 'text-product-800/80' : 'text-white/70',
-                    member.bio.length < 40 && 'font-display text-xl italic md:text-2xl'
+                    bright ? 'text-product-800/80' : 'text-white/70'
                   )}
                 >
                   {member.bio}

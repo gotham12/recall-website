@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { CONTACT_EMAIL, DEMO_URL } from '@/lib/constants';
+import { CONTACT_EMAIL, DEMO_URL, FOUNDERS } from '@/lib/constants';
 import { gmailComposeUrl } from '@/lib/asset-path';
 import { cn } from '@/lib/utils';
 
@@ -67,7 +67,7 @@ const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) 
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 lg:gap-24">
           <div className="flex flex-col space-y-6">
             <h3 className={cn('text-[11px] font-medium tracking-[0.2em] uppercase', light ? 'text-product-800/50' : 'text-zinc-500')}>
               Explore
@@ -91,16 +91,7 @@ const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) 
                 </FooterLink>
               </li>
               <li><FooterLink href="/#contact" light={light}>Get in touch</FooterLink></li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col space-y-6">
-            <h3 className={cn('text-[11px] font-medium tracking-[0.2em] uppercase', light ? 'text-product-800/50' : 'text-zinc-500')}>
-              Code
-            </h3>
-            <ul className="flex flex-col space-y-3">
-              <li><FooterLink href="https://github.com/gotham12/recall-website" light={light}>Website repo</FooterLink></li>
-              <li><FooterLink href="https://github.com/AlmightyTamer/recall" light={light}>App repo</FooterLink></li>
+              <li><FooterLink href="/#developers" light={light}>For developers</FooterLink></li>
             </ul>
           </div>
         </div>
@@ -114,7 +105,7 @@ const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) 
 
       <div className="mt-auto pb-8 z-10 text-center w-full relative">
         <p className={cn('text-[10px] tracking-[0.2em] font-medium uppercase', light ? 'text-product-800/40' : 'text-zinc-700')}>
-          © 2026 Recall — Built by Advaith & Param
+          {FOUNDERS.copyrightLine}
         </p>
       </div>
     </footer>

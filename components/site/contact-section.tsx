@@ -5,6 +5,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import SpotlightCard from '@/components/SpotlightCard';
 import { CONTACT_EMAIL } from '@/lib/constants';
 import { gmailComposeUrl } from '@/lib/asset-path';
+import { FoundersCredit } from '@/components/site/founders-credit';
 import { cn } from '@/lib/utils';
 import AnimatedButton from '@/components/ui/animated-button';
 import { GlowBorderCard } from '@/components/ui/glow-border-card';
@@ -38,8 +39,9 @@ export function ContactSection({ bright = false }: { bright?: boolean }) {
                 Let&apos;s build dignified care together.
               </h2>
               <p className={cn('mt-3 max-w-lg', bright ? 'text-product-800/70' : 'text-white/55')}>
-                Partnerships, pilots, and press — reach out anytime.
+                Partnerships, pilots, and press — reach out anytime. Demo access is shared privately by email.
               </p>
+              <FoundersCredit bright={bright} className="mt-4" />
               <a
                 href={gmailComposeUrl(CONTACT_EMAIL, { subject: 'Recall — Partnership inquiry' })}
                 target="_blank"

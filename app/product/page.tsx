@@ -9,7 +9,9 @@ import {
 import { DemoVideoSection } from '@/components/demo-video';
 import { DualExperienceSection } from '@/components/dual-experience';
 import { SolutionSection } from '@/components/solution';
+import { DevLinksSection } from '@/components/site/dev-links';
 import { FlowerBackground } from '@/components/site/flower-background';
+import { PrivacyTrustSection } from '@/components/site/privacy-trust';
 import { Navbar } from '@/components/site/navbar';
 
 export default function ProductPage() {
@@ -19,6 +21,7 @@ export default function ProductPage() {
       <div className="relative z-10">
         <Navbar tone="light" />
         <SolutionSection />
+        <PrivacyTrustSection bright />
         <DemoVideoSection bright />
         <DualExperienceSection />
         <FeaturesBento />
@@ -26,6 +29,7 @@ export default function ProductPage() {
         <ScreenshotsSection />
         <StackSection />
         <CTASection />
+        <DevLinksSection bright />
         <SiteFooter variant="light" />
       </div>
     </main>
