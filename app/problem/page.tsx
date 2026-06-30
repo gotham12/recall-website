@@ -7,7 +7,7 @@ import { VisualBackdrop } from '@/components/site/visual-backdrop';
 
 export default function ProblemPage() {
   return (
-    <main className="theme-problem relative min-h-screen bg-problem-950 text-white">
+    <main className="theme-problem relative min-h-screen bg-zinc-950 text-zinc-100">
       <ScrollFlowers mode="wilt" />
       <VisualBackdrop variant="problem" />
       <Navbar tone="dark" />

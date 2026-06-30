@@ -17,11 +17,25 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 18px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 20px;
+  }
 }
 
 body {
   @apply bg-ink text-white antialiased;
   font-family: var(--font-sans);
+  line-height: 1.6;
 }
 
 ::selection {
@@ -45,7 +59,7 @@ body {
 }
 
 .section-label {
-  @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45;
+  @apply text-xs font-semibold uppercase tracking-[0.22em] text-white/45 md:text-sm;
 }
 
 .phone-frame {
@@ -224,15 +238,31 @@ body {
 /* Emotional color journey — problem (dark) vs product (bright) */
 .theme-problem {
   color-scheme: dark;
+  background-color: #050506;
 }
 
 .theme-problem .section-label {
-  @apply text-recall-coral/75;
+  @apply text-zinc-500;
 }
 
 .theme-problem .glass,
 .theme-problem .glass-strong {
-  @apply border-recall-coral/15 bg-problem-900/70;
+  @apply border-zinc-700/40 bg-zinc-900/80;
+}
+
+.theme-problem .text-recall-coral,
+.theme-problem .text-recall-coral\/80 {
+  @apply text-zinc-400;
+}
+
+.theme-problem .border-recall-coral\/20,
+.theme-problem .border-recall-coral\/30 {
+  @apply border-zinc-600/40;
+}
+
+.theme-problem .bg-recall-coral\/5,
+.theme-problem .bg-recall-coral\/10 {
+  @apply bg-zinc-800/50;
 }
 
 .theme-product {
