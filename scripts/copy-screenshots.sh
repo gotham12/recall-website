@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")" && pwd)"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 ASSETS="/Users/advaith/.cursor/projects/Users-advaith-Recall-recall/assets"
 DEST="$ROOT/public/screenshots"
 mkdir -p "$DEST"
