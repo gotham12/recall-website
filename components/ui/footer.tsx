@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { CONTACT_EMAIL, DEMO_URL } from '@/lib/constants';
+import { gmailComposeUrl } from '@/lib/asset-path';
 import { cn } from '@/lib/utils';
 
 const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) => {
@@ -54,7 +55,9 @@ const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) 
           </p>
 
           <a
-            href={`mailto:${CONTACT_EMAIL}`}
+            href={gmailComposeUrl(CONTACT_EMAIL, { subject: 'Recall — Get in touch' })}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               'mt-4 inline-block text-sm font-medium transition hover:opacity-80',
               light ? 'text-recall-blue' : 'text-recall-sky'
@@ -83,7 +86,7 @@ const Footer: React.FC<{ variant?: 'dark' | 'light' }> = ({ variant = 'dark' }) 
             </h3>
             <ul className="flex flex-col space-y-3">
               <li>
-                <FooterLink href={`mailto:${CONTACT_EMAIL}`} light={light}>
+                <FooterLink href={gmailComposeUrl(CONTACT_EMAIL)} light={light} external>
                   Email
                 </FooterLink>
               </li>
@@ -122,13 +125,22 @@ interface FooterLinkProps {
   href: string;
   children: React.ReactNode;
   light?: boolean;
+  external?: boolean;
 }
 
-const FooterLink: React.FC<FooterLinkProps> = ({ href, children, light }) => {
+const FooterLink: React.FC<FooterLinkProps> = ({ href, children, light, external }) => {
   const className = cn(
     'text-sm tracking-wide transition-colors duration-200 ease-in-out block',
     light ? 'text-product-800 hover:text-recall-blue' : 'text-zinc-200 hover:text-white'
   );
+
+  if (external || href.startsWith('http')) {
+    return (
+      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
 
   if (href.startsWith('/') && !href.startsWith('//')) {
     return (

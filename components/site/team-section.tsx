@@ -3,9 +3,9 @@
 import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
 import SpotlightCard from '@/components/SpotlightCard';
+import { AssetImage } from '@/components/site/asset-image';
 import { TEAM } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 
 export function TeamSection({ bright = false }: { bright?: boolean }) {
   return (
@@ -28,21 +28,22 @@ export function TeamSection({ bright = false }: { bright?: boolean }) {
 
       <div className="relative mx-auto mt-16 grid max-w-4xl gap-8 px-6 md:grid-cols-2">
         {TEAM.map((member, i) => (
-          <FadeContent key={member.name} blur delay={i * 0.1}>
+          <FadeContent key={member.name} blur delay={i * 0.08} threshold={0.05}>
             <SpotlightCard
               className={cn(
-                'overflow-hidden border p-0',
+                '!rounded-3xl overflow-hidden border p-0',
                 bright
                   ? 'border-product-200 bg-white/80 shadow-xl shadow-recall-blue/10'
                   : 'border-white/10 bg-ink-100/70'
               )}
               spotlightColor={bright ? 'rgba(79, 140, 255, 0.25)' : 'rgba(139, 92, 246, 0.22)'}
             >
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
-                <Image
+              <div className="relative aspect-[4/5] min-h-[320px] w-full overflow-hidden bg-ink-200">
+                <AssetImage
                   src={member.photo}
                   alt={member.name}
                   fill
+                  priority={i === 0}
                   className="object-cover object-top transition duration-700 hover:scale-105"
                   sizes="(max-width:768px) 100vw, 400px"
                 />

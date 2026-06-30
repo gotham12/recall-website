@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { AssetImage } from '@/components/site/asset-image';
 import { cn } from '@/lib/utils';
 
 type VisualBackdropProps = {
@@ -23,13 +23,13 @@ const images = {
 export function VisualBackdrop({ variant, className }: VisualBackdropProps) {
   return (
     <div aria-hidden className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}>
-      <Image
+      <AssetImage
         src={images[variant]}
         alt=""
         fill
+        priority={variant === 'home'}
         className="object-cover opacity-40 mix-blend-soft-light animate-pulse-soft"
         sizes="100vw"
-        priority={variant === 'home'}
       />
       <div className={cn('absolute inset-0 bg-gradient-to-b', overlays[variant])} />
       <div className="absolute inset-0 bg-grid-fade grid-bg opacity-30" />

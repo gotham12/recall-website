@@ -2,9 +2,11 @@
 
 import BounceCards from '@/components/BounceCards';
 import AnimatedButton from '@/components/ui/animated-button';
+import { GlowBorderCard } from '@/components/ui/glow-border-card';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { SpotlightNavbar } from '@/components/ui/spotlight-navbar';
 import { CONTACT_EMAIL, DEMO_URL } from '@/lib/constants';
+import { gmailComposeUrl } from '@/lib/asset-path';
 import { cn } from '@/lib/utils';
 import { Brain, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -71,7 +73,9 @@ export function Navbar({ tone = 'dark' }: { tone?: 'dark' | 'light' | 'auto' }) 
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href={`mailto:${CONTACT_EMAIL}`}
+            href={gmailComposeUrl(CONTACT_EMAIL, { subject: 'Recall — Get in touch' })}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               'hidden items-center gap-1.5 text-sm transition hover:opacity-80 md:inline-flex',
               isProduct ? 'text-product-700' : 'text-white/55 hover:text-white'
@@ -101,25 +105,41 @@ export function Navbar({ tone = 'dark' }: { tone?: 'dark' | 'light' | 'auto' }) 
 export function PageNavCards() {
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <Link href="/problem/" className="group">
-        <div className="theme-problem relative overflow-hidden rounded-3xl border border-recall-coral/20 bg-problem-900/80 p-8 transition hover:border-recall-coral/40">
-          <p className="section-label text-recall-coral/80">Chapter 1</p>
-          <h3 className="font-display mt-3 text-3xl text-white">The crisis families face</h3>
-          <p className="mt-3 text-sm text-white/50">Dark, urgent statistics and structural gaps in care.</p>
-          <span className="mt-6 inline-flex text-sm text-recall-coral group-hover:underline">
-            Enter the problem →
-          </span>
-        </div>
+      <Link href="/problem/" className="group block">
+        <GlowBorderCard
+          width="100%"
+          aspectRatio="auto"
+          borderRadius="1.5rem"
+          colorPreset="custom"
+          className="theme-problem min-h-[220px] border-recall-coral/25 bg-problem-900/85 transition group-hover:border-recall-coral/45"
+        >
+          <div className="p-8 text-left">
+            <p className="section-label text-recall-coral/80">Chapter 1</p>
+            <h3 className="font-display mt-3 text-3xl text-white">The crisis families face</h3>
+            <p className="mt-3 text-sm text-white/50">Dark, urgent statistics and structural gaps in care.</p>
+            <span className="mt-6 inline-flex text-sm text-recall-coral group-hover:underline">
+              Enter the problem →
+            </span>
+          </div>
+        </GlowBorderCard>
       </Link>
-      <Link href="/product/" className="group">
-        <div className="theme-product relative overflow-hidden rounded-3xl border border-recall-mint/30 bg-white/90 p-8 shadow-lg shadow-recall-blue/10 transition hover:border-recall-blue/40">
-          <p className="section-label text-recall-blue/80">Chapter 2</p>
-          <h3 className="font-display mt-3 text-3xl text-product-950">The product that responds</h3>
-          <p className="mt-3 text-sm text-product-800/65">Bright, hopeful platform walkthrough and live demo.</p>
-          <span className="mt-6 inline-flex text-sm text-recall-blue group-hover:underline">
-            See the solution →
-          </span>
-        </div>
+      <Link href="/product/" className="group block">
+        <GlowBorderCard
+          width="100%"
+          aspectRatio="auto"
+          borderRadius="1.5rem"
+          colorPreset="aurora"
+          className="theme-product min-h-[220px] border-recall-mint/30 bg-white/90 shadow-lg shadow-recall-blue/10 transition group-hover:border-recall-blue/40"
+        >
+          <div className="p-8 text-left">
+            <p className="section-label text-recall-blue/80">Chapter 2</p>
+            <h3 className="font-display mt-3 text-3xl text-product-950">The product that responds</h3>
+            <p className="mt-3 text-sm text-product-800/65">Bright, hopeful platform walkthrough and live demo.</p>
+            <span className="mt-6 inline-flex text-sm text-recall-blue group-hover:underline">
+              See the solution →
+            </span>
+          </div>
+        </GlowBorderCard>
       </Link>
     </div>
   );
@@ -153,7 +173,7 @@ export function HomeHero() {
         <div className="mt-16 w-full max-w-4xl">
           <PageNavCards />
         </div>
-        <div className="pointer-events-none relative mx-auto mt-20 hidden h-[280px] max-w-lg opacity-90 md:block">
+        <div className="pointer-events-none relative mx-auto mt-20 h-[280px] max-w-lg opacity-90 md:block">
           <BounceCards
             className="mx-auto"
             images={[

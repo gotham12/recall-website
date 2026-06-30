@@ -3,7 +3,7 @@
 import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
-import Image from 'next/image';
+import { AssetImage } from '@/components/site/asset-image';
 
 const patientScreens = [
   { src: '/screenshots/patient-today.png', label: 'Today', desc: 'Sleep, heart rate, meds at a glance' },
@@ -45,7 +45,7 @@ function ExperienceStack({
               <div className="phone-frame w-[220px] shrink-0">
                 <div className="phone-notch" />
                 <div className="relative aspect-[9/19.5] w-full overflow-hidden bg-ink-200">
-                  <Image src={s.src} alt={`Recall ${s.label} screen`} fill className="object-cover object-top" sizes="220px" />
+                  <AssetImage src={s.src} alt={`Recall ${s.label} screen`} fill className="object-cover object-top" sizes="220px" />
                 </div>
               </div>
               <div className="text-center md:pt-6 md:text-left">

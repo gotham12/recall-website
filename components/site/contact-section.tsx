@@ -4,6 +4,7 @@ import FadeContent from '@/components/FadeContent';
 import ScrollReveal from '@/components/ScrollReveal';
 import SpotlightCard from '@/components/SpotlightCard';
 import { CONTACT_EMAIL } from '@/lib/constants';
+import { gmailComposeUrl } from '@/lib/asset-path';
 import { cn } from '@/lib/utils';
 import AnimatedButton from '@/components/ui/animated-button';
 import { GlowBorderCard } from '@/components/ui/glow-border-card';
@@ -40,7 +41,9 @@ export function ContactSection({ bright = false }: { bright?: boolean }) {
                 Partnerships, pilots, and press — reach out anytime.
               </p>
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={gmailComposeUrl(CONTACT_EMAIL, { subject: 'Recall — Partnership inquiry' })}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   'mt-4 inline-flex items-center gap-2 text-sm font-medium transition hover:opacity-80',
                   bright ? 'text-recall-blue' : 'text-recall-sky'
@@ -50,7 +53,11 @@ export function ContactSection({ bright = false }: { bright?: boolean }) {
                 {CONTACT_EMAIL}
               </a>
             </div>
-            <a href={`mailto:${CONTACT_EMAIL}`}>
+            <a
+              href={gmailComposeUrl(CONTACT_EMAIL, { subject: 'Recall — Partnership inquiry' })}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <AnimatedButton
                 className={cn(
                   'rounded-full',

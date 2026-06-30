@@ -18,7 +18,7 @@ export default function ProductPage() {
       <VisualBackdrop variant="product" />
       <Navbar tone="light" />
       <SolutionSection />
-      <DemoVideoSection />
+      <DemoVideoSection bright />
       <DualExperienceSection />
       <FeaturesBento />
       <CascadeSection />
