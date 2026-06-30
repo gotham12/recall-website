@@ -5,23 +5,24 @@ import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Recall — AI Cognitive Care for Families',
+  title: 'Recall — When Memory Fades, Someone Remains',
   description:
-    'Recall is an AI-native cognitive care platform: Clara for patients, Recall AI for caregivers, and the ACSE engine that catches decline before crisis.',
+    'Recall is cognitive care for Margaret and clarity for Susan — Clara voice companion, Recall AI for caregivers, and ACSE early signal. Founded by Advaith Vijayasankaran (CEO) & Param Tyagi (CTO).',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Recall — AI Cognitive Care',
-    description: 'Early signal. Automatic de-escalation. Dignity preserved.',
+    title: 'Recall — When Memory Fades, Someone Remains',
+    description:
+      'Clara for patients. Recall AI for caregivers. One source of truth — built by Advaith Vijayasankaran & Param Tyagi.',
     type: 'website',
     url: SITE_URL,
     siteName: 'Recall',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Recall — AI Cognitive Care',
-    description: 'Clara for patients. Recall AI for caregivers. One source of truth.',
+    title: 'Recall — When Memory Fades, Someone Remains',
+    description: 'Clara for patients. Recall AI for caregivers. Founded by Advaith & Param.',
   },
 };
 

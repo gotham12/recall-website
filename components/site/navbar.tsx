@@ -2,8 +2,6 @@
 
 import AnimatedButton from '@/components/ui/animated-button';
 import { GlowBorderCard } from '@/components/ui/glow-border-card';
-import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
-import { ScreenshotGrid } from '@/components/site/screenshot-grid';
 import { SpotlightNavbar } from '@/components/ui/spotlight-navbar';
 import { CONTACT_EMAIL, DEMO_URL } from '@/lib/constants';
 import { gmailComposeUrl } from '@/lib/asset-path';
@@ -142,49 +140,5 @@ export function PageNavCards() {
         </GlowBorderCard>
       </Link>
     </div>
-  );
-}
-
-export function HomeHero() {
-  return (
-    <section className="relative min-h-[70vh] overflow-hidden pt-28 md:pt-32">
-      <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-6 py-16 text-center">
-        <p className="mb-6 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-white/60 md:text-sm">
-          Go deeper — two chapters
-        </p>
-        <h1 className="font-display max-w-4xl text-4xl leading-[1.02] md:text-6xl">
-          Feel the weight of the problem.
-          <span className="mt-2 block text-gradient-accent italic">Then feel the lift of the product.</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60 md:text-xl">
-          Already know the pitch? Dive into the full narrative — dark tones for the gap families face, brighter tones
-          when Clara, Recall AI, and ACSE enter the story.
-        </p>
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Link href="/problem/">
-            <InteractiveHoverButton className="border-recall-coral/30 bg-recall-coral/10 text-white">
-              Start with the problem
-            </InteractiveHoverButton>
-          </Link>
-          <Link href="/product/">
-            <AnimatedButton className="rounded-full border-white/15 bg-white text-ink">Jump to the product</AnimatedButton>
-          </Link>
-        </div>
-        <div className="mt-16 w-full max-w-4xl">
-          <PageNavCards />
-        </div>
-        <div className="relative mx-auto mt-20 w-full max-w-3xl">
-          <ScreenshotGrid
-            columns={3}
-            variant="dark"
-            items={[
-              { image: '/screenshots/patient-clara.png', title: 'Clara', subtitle: 'Patient' },
-              { image: '/screenshots/supervisor-recall-ai.png', title: 'Recall AI', subtitle: 'Supervisor' },
-              { image: '/screenshots/patient-today.png', title: 'Today', subtitle: 'Patient' },
-            ]}
-          />
-        </div>
-      </div>
-    </section>
   );
 }

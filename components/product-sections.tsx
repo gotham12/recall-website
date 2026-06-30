@@ -30,8 +30,9 @@ const featureItems = [
   {
     id: 'clara',
     title: 'Clara Voice Companion',
-    subtitle: 'Margaret talks to Clara like family',
-    description: 'Edge AI on Cloudflare Workers with ElevenLabs Jessica voice. Context refreshed before every reply.',
+    subtitle: 'She never feels like she failed a test',
+    description:
+      'Margaret talks to someone who remembers — edge AI voice, refreshed before every reply, gentle orientation when the day blurs.',
     icon: <Mic className="h-6 w-6" />,
     content: (
       <p>
@@ -43,8 +44,9 @@ const featureItems = [
   {
     id: 'recall-ai',
     title: 'Recall AI',
-    subtitle: 'Susan asks, Recall answers',
-    description: 'Live briefing — meds, alerts, Clara logs, checkup prep in plain English.',
+    subtitle: 'Susan gets answers in plain English',
+    description:
+      'Live briefings on meds, alerts, Clara logs, and checkup prep — so caregivers act on signal, not panic.',
     icon: <MessageCircle className="h-6 w-6" />,
     content: (
       <p>
@@ -56,8 +58,9 @@ const featureItems = [
   {
     id: 'acse',
     title: 'ACSE Engine',
-    subtitle: 'Real-time cognitive scoring',
-    description: 'Scores repeat questions, missed meds, and disorientation. Drops below 50 → Comfort Mode.',
+    subtitle: 'Catch drift before crisis',
+    description:
+      'Scores repeat questions, missed meds, and disorientation in real time — drops below 50 trigger Comfort Mode.',
     icon: <Activity className="h-6 w-6" />,
     content: (
       <p>
@@ -69,16 +72,18 @@ const featureItems = [
   {
     id: 'vision',
     title: 'Vision Med Verification',
-    subtitle: 'Camera reads pill bottles',
-    description: 'Tylenol verifies live. Donepezil blocks double-dose with gentle messaging.',
+    subtitle: 'No more guessing about pills',
+    description:
+      'The camera reads the bottle and confirms the dose — blocking double-doses with warmth, not alarms.',
     icon: <Camera className="h-6 w-6" />,
     content: <p>Camera reads pill bottles on the edge. Tylenol verifies live. Donepezil blocks double-dose with gentle messaging.</p>,
   },
   {
     id: 'comfort',
     title: 'Comfort Mode',
-    subtitle: 'De-escalation before crisis',
-    description: 'Grounding voice, breathing cycles, nature scenes, and Tibetan bells.',
+    subtitle: 'De-escalation before the ER',
+    description:
+      'Grounding voice, breathing cycles, and nature scenes — before sundowning becomes a crisis call.',
     icon: <Wind className="h-6 w-6" />,
     content: (
       <p>
@@ -90,8 +95,9 @@ const featureItems = [
   {
     id: 'photos',
     title: 'Memory Photo Recap',
-    subtitle: 'Family moments when Margaret feels alone',
-    description: 'Clara opens a shuffled album of family moments with warm narration.',
+    subtitle: 'Family moments when she feels alone',
+    description:
+      'Clara opens a shuffled album of birthdays and garden dinners — with warm narration, not pity.',
     icon: <ImageIcon className="h-6 w-6" />,
     content: (
       <p>

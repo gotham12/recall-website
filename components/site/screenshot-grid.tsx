@@ -12,7 +12,7 @@ export type ScreenshotItem = {
 };
 
 type ScreenshotGridProps = {
-  items: ScreenshotItem[];
+  items: readonly ScreenshotItem[];
   columns?: 2 | 3;
   variant?: 'dark' | 'light';
   phone?: boolean;
@@ -53,7 +53,7 @@ export function ScreenshotGrid({
                   <div className="relative aspect-[9/19.5] w-full overflow-hidden bg-ink-200">
                     <AssetImage
                       src={item.image}
-                      alt={item.title}
+                      alt={item.desc ? `${item.title} — ${item.desc}` : `${item.title}${item.subtitle ? `, ${item.subtitle}` : ''}`}
                       fill
                       className="object-cover object-top"
                       sizes="220px"
@@ -64,7 +64,7 @@ export function ScreenshotGrid({
                 <div className="relative aspect-[9/16] w-full overflow-hidden bg-ink-200">
                   <AssetImage
                     src={item.image}
-                    alt={item.title}
+                    alt={item.desc ? `${item.title} — ${item.desc}` : `${item.title}${item.subtitle ? `, ${item.subtitle}` : ''}`}
                     fill
                     className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
                     sizes="(max-width:768px) 50vw, 320px"

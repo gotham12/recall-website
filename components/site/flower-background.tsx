@@ -1,7 +1,7 @@
 'use client';
 
-import BlurText from '@/components/BlurText';
-import GradientText from '@/components/GradientText';
+import AnimatedButton from '@/components/ui/animated-button';
+import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import {
   applyBloomProgress,
   applyWiltProgress,
@@ -12,7 +12,9 @@ import {
   startAmbientMotion,
 } from '@/components/site/flower-animation';
 import { FlowerScene } from '@/components/site/flower-scene';
+import { DEMO_URL, HERO_COPY } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -106,8 +108,8 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
             }
 
             gsap.set('.hero-opening-copy', {
-              opacity: gsap.utils.clamp(0.35, 1, 0.35 + bloomP * 0.65) * (1 - wiltP),
-              y: gsap.utils.interpolate(bloomP * 8, -48, wiltP),
+              opacity: gsap.utils.clamp(0.85, 1, 0.85 + bloomP * 0.15) * (1 - wiltP),
+              y: gsap.utils.interpolate(bloomP * 4, -48, wiltP),
               filter: wiltP > 0.2 ? `blur(${wiltP * 8}px)` : 'blur(0px)',
             });
 
@@ -211,26 +213,27 @@ export function FlowerBackground({ phase }: FlowerBackgroundProps) {
               reducedMotion={reducedMotion}
               reducedBloomProgress={reducedBloom}
             />
-            <div className="hero-opening-copy relative z-20 mt-8 max-w-3xl text-center opacity-40 md:mt-10">
-              <BlurText
-                text="Recall"
-                className="font-display justify-center text-7xl text-white md:text-9xl"
-                animateBy="letters"
-                delay={45}
-                threshold={0}
-              />
-              <div className="mt-5">
-                <GradientText
-                  colors={['#9CA3AF', '#D1D5DB', '#FDA4AF', '#F9A8D4']}
-                  animationSpeed={5}
-                  className="font-display text-2xl italic md:text-4xl"
-                >
-                  Grey fades. Color returns.
-                </GradientText>
-              </div>
-              <p className="mx-auto mt-6 max-w-xl text-lg text-white/55 md:text-xl">
-                Scroll to open the flower — memory and clarity returning, petal by petal.
+            <div className="hero-opening-copy pointer-events-auto relative z-20 mt-6 max-w-3xl text-center md:mt-8">
+              <p className="mb-4 font-display text-sm uppercase tracking-[0.22em] text-white/40">Recall</p>
+              <h1 className="font-display text-4xl leading-[1.08] text-white md:text-5xl lg:text-6xl">
+                {HERO_COPY.headline}
+              </h1>
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
+                {HERO_COPY.subhead}
               </p>
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">
+                  <AnimatedButton className="rounded-full border-white/15 bg-white px-8 text-ink">
+                    Try the live app
+                  </AnimatedButton>
+                </a>
+                <Link href="/#demo">
+                  <InteractiveHoverButton className="border-recall-coral/25 bg-recall-coral/10 px-8 text-white">
+                    Watch the demo
+                  </InteractiveHoverButton>
+                </Link>
+              </div>
+              <p className="mx-auto mt-6 max-w-md text-sm text-white/40 md:text-base">{HERO_COPY.scrollHint}</p>
             </div>
           </div>
         </div>

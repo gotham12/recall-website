@@ -16,6 +16,113 @@ export const GITHUB_LINKS = {
   app: 'https://github.com/AlmightyTamer/recall',
 } as const;
 
+export const HERO_COPY = {
+  headline: 'When the world goes quiet, a name remains.',
+  subhead:
+    'For the person losing the thread of a day — and the daughter holding the rest together. Recall gives Margaret a voice that remembers, and Susan a signal she can trust.',
+  scrollHint: 'Scroll — the flower opens as memory returns.',
+} as const;
+
+/** Home stats band — verify figures before major press pushes. */
+export const HOME_STATS = [
+  {
+    id: 'global-dementia',
+    value: 55,
+    suffix: 'M+',
+    label: 'People worldwide living with dementia',
+    source: 'WHO / Alzheimer\u2019s Disease International · 2025',
+  },
+  {
+    id: 'caregivers',
+    value: 12,
+    suffix: 'M',
+    label: 'Unpaid U.S. caregivers supporting someone with dementia',
+    source: 'Alzheimer\u2019s Association · 2025 Facts & Figures',
+  },
+  {
+    id: 'on-device',
+    value: 100,
+    suffix: '%',
+    prefix: '',
+    label: 'Health data stored on-device first — before anything leaves Margaret\u2019s phone',
+    source: 'Dexie (IndexedDB) offline-first architecture',
+  },
+] as const;
+
+export const PATIENT_TESTIMONIAL = {
+  quote:
+    'When I forget a name, the room feels empty. Clara says it back to me — softly, like someone who was there all along.',
+  attribution: 'Margaret, 81',
+  context: 'Living at home · daughter Susan nearby',
+} as const;
+
+export const CAREGIVER_TESTIMONIAL = {
+  quote:
+    'I didn\u2019t know Mom had skipped her afternoon meds until she called me crying at 8 PM. By then we were already talking about the ER — and I had nothing to show the doctor except my memory of the day.',
+  attribution: 'Susan M.',
+  context: 'Composite caregiver scenario inspired by families Recall is built for',
+} as const;
+
+export const HOME_FEATURES = [
+  {
+    id: 'clara',
+    title: 'Clara',
+    tag: 'Voice companion',
+    description:
+      'Margaret never feels like she failed a test — Clara talks like family, remembers her routines, and gently orients her when the day blurs. Edge AI voice on Cloudflare Workers, refreshed before every reply.',
+  },
+  {
+    id: 'meds',
+    title: 'Vision-verified medication',
+    tag: 'Safety without shame',
+    description:
+      'Susan stops guessing whether Mom took her pills — the camera reads the bottle, confirms the dose, and blocks a dangerous double-take with a warm voice, not an alarm.',
+  },
+  {
+    id: 'acse',
+    title: 'ACSE score & Comfort Mode',
+    tag: 'Early signal',
+    description:
+      'Families act before crisis — the engine scores repeat questions, missed meds, and disorientation in real time; when stability drops, Comfort Mode de-escalates with grounding voice and breath before sundowning becomes an ER visit.',
+  },
+  {
+    id: 'vitals',
+    title: 'Apple Health vitals',
+    tag: 'Whole-person picture',
+    description:
+      'Caregivers see more than mood — heart rate, steps, and sleep from Apple Health surface alongside cognitive signal so Susan walks into the doctor with data, not dread.',
+  },
+  {
+    id: 'privacy',
+    title: 'On-device privacy',
+    tag: 'Trust by design',
+    description:
+      'Margaret keeps dignity and control — meds, routines, and Clara conversations live in Dexie on her device first; edge inference handles AI without storing patient audio for training.',
+  },
+] as const;
+
+export const HOME_SCREENSHOTS = [
+  {
+    image: '/screenshots/patient-clara.png',
+    title: 'Clara',
+    subtitle: 'Patient',
+    desc: 'A voice that remembers her name when she cannot.',
+  },
+  {
+    image: '/screenshots/supervisor-recall-ai.png',
+    title: 'Recall AI',
+    subtitle: 'Caregiver',
+    desc: 'Plain-English briefings when Susan needs answers fast.',
+  },
+  {
+    image: '/screenshots/patient-today.png',
+    title: 'Today',
+    subtitle: 'Patient',
+    desc: 'One gentle view of meds, moments, and the day ahead.',
+  },
+] as const;
+
+/** Legacy stats — used on /problem page */
 export const KEY_STATS = [
   {
     value: '6.9M',
@@ -34,20 +141,13 @@ export const KEY_STATS = [
   },
 ] as const;
 
-export const CAREGIVER_TESTIMONIAL = {
-  quote:
-    'I didn\u2019t know Mom had skipped her afternoon meds until she called me crying at 8 PM. By then we were already talking about the ER \u2014 and I had nothing to show the doctor except my memory of the day.',
-  attribution: 'Susan M.',
-  context: 'Composite caregiver scenario inspired by families Recall is built for',
-} as const;
-
 export const PITCH_SUMMARY = {
   headline: 'Cognitive care that catches decline before crisis.',
-  body: 'Recall gives patients a warm voice companion (Clara), gives caregivers a live AI advisor (Recall AI), and scores cognitive stability in real time (ACSE) \u2014 so families act on signal, not panic. Offline-first. Voice-first. Built for dignity at home.',
+  body: 'Recall gives patients a warm voice companion (Clara), gives caregivers a live AI advisor (Recall AI), and scores cognitive stability in real time (ACSE) — so families act on signal, not panic.',
   bullets: [
-    'Clara for patients \u2014 voice, meds, photos, orientation without shame',
-    'Recall AI for caregivers \u2014 briefings, transcripts, checkup prep in plain English',
-    'ACSE engine \u2014 live cognitive scoring; Comfort Mode before sundowning becomes crisis',
+    'Clara keeps Margaret oriented — voice, meds, photos, without shame',
+    'Recall AI briefs Susan in plain English — meds, alerts, checkup prep',
+    'ACSE catches drift early — Comfort Mode before crisis',
   ],
 } as const;
 

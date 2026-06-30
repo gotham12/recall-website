@@ -53,19 +53,18 @@ export function DemoVideoSection({ bright = false }: { bright?: boolean }) {
         </div>
 
         <p className={cn('mt-4 text-center text-sm md:text-base', bright ? 'text-product-800/55' : 'text-white/45')}>
-          Want hands-on demo access?{' '}
+          Demo persona: Margaret Chen · Patient login open · Supervisor access by email.{' '}
           <a
             href={gmailComposeUrl(CONTACT_EMAIL, {
               subject: 'Recall — Request demo access',
-              body: 'Hi — I would like private credentials for the Recall live demo.',
+              body: 'Hi — I would like credentials for the Recall live demo (Margaret Chen persona).',
             })}
             target="_blank"
             rel="noopener noreferrer"
             className={cn('font-medium underline-offset-2 hover:underline', bright ? 'text-recall-blue' : 'text-recall-sky')}
           >
-            Email us
-          </a>{' '}
-          and we&apos;ll send access details directly.
+            Request access
+          </a>
         </p>
       </div>
     </section>

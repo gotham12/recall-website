@@ -44,6 +44,13 @@ const FadeContent: React.FC<FadeContentProps> = ({
     const el = ref.current;
     if (!el) return;
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      gsap.set(el, { autoAlpha: 1, filter: 'blur(0px)', y: 0 });
+      onComplete?.();
+      return;
+    }
+
     let scrollerTarget: Element | string | null = container || document.getElementById('snap-main-container') || null;
 
     if (typeof scrollerTarget === 'string') {
