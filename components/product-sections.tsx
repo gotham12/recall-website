@@ -312,8 +312,8 @@ export function Footer() {
           Built by Advaith & Param · AI-native cognitive care
         </p>
         <div className="flex gap-6 text-sm text-white/45">
-          <a href="https://github.com/AlmightyTamer/recall" target="_blank" rel="noopener noreferrer" className="hover:text-white">App repo</a>
-          <a href="https://almightytamer.github.io/recall/" target="_blank" rel="noopener noreferrer" className="hover:text-white">Live demo</a>
+          <a href="https://github.com/gotham12/recall-website" target="_blank" rel="noopener noreferrer" className="hover:text-white">Website</a>
+          <a href="https://github.com/AlmightyTamer/recall" target="_blank" rel="noopener noreferrer" className="hover:text-white">App</a>
         </div>
       </div>
     </footer>
