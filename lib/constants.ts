@@ -178,12 +178,6 @@ export const TEAM = [
   },
 ] as const;
 
-export const HERO_FLOWER = {
-  /** Single hyperrealistic forget-me-not — used for hero animation and product backdrop */
-  image: '/screenshots/flower-forget-me-not.png',
-} as const;
-
 export const PAGE_BACKGROUNDS = {
   problemBrain: '/screenshots/problem-brain-atmosphere.png',
-  productFlower: '/screenshots/flower-forget-me-not.png',
 } as const;

@@ -73,11 +73,13 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
 
           if (bgBloom) {
             gsap.set(bgBloom, {
-              opacity: lerp(0, mobile ? 0.42 : 0.62, clamp01((bloomP - 0.12) / 0.88)),
+              opacity: lerp(0, mobile ? 0.48 : 0.72, clamp01((bloomP - 0.08) / 0.92)),
             });
           }
         },
       });
+
+      ScrollTrigger.refresh();
     }, section);
 
     return () => ctx.revert();
