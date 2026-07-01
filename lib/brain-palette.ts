@@ -1,4 +1,4 @@
-/** Brain-decline hero — tissue zoom + tumor → dim → resolve. */
+/** Brain-decline hero — profile → brain → tissue → tumor → resolve. */
 
 export const TUMOR_PALETTE = {
   core: '#1A1B22',
@@ -13,19 +13,30 @@ export const RESOLUTION_GLOW = {
   violet: '#9B6EDB',
 } as const;
 
-/** Lower-right hemisphere — matches decay cluster in brain-diagram-decline.png. */
+/** Skull / temple — where profile zoom lands before brain diagram appears. */
+export const PROFILE_FOCUS = {
+  cx: 0.72,
+  cy: 0.24,
+} as const;
+
+/** Lower-right hemisphere — decay cluster in brain-diagram-decline.png. */
 export const TISSUE_FOCUS = {
   cx: 0.68,
   cy: 0.62,
 } as const;
 
 /**
- * Beat map (0–1). p=0 is already zoomed on tissue — no wide establishing shot.
- * Tumor grows during tissueZoom; decline crossfade follows.
+ * Beat map (0–1).
+ * 1. Full side profile
+ * 2. Zoom into skull → brain diagram
+ * 3. Zoom into tissue
+ * 4. Tumor growth + decline
+ * 5. Resolve to copy
  */
 export const BEATS = {
-  tissueZoomEnd: 0.35,
-  darkenEnd: 0.55,
+  profileEnd: 0.18,
+  brainEnterEnd: 0.38,
+  tissueZoomEnd: 0.58,
   tumorGrowEnd: 0.82,
   resolveEnd: 1,
 } as const;
@@ -37,7 +48,7 @@ export const RESOLVE = {
   copySub: BEATS.tumorGrowEnd + 0.06,
   copyCta: BEATS.tumorGrowEnd + 0.12,
   sceneFade: BEATS.tumorGrowEnd + 0.04,
-  bloomStart: BEATS.darkenEnd,
+  bloomStart: BEATS.tissueZoomEnd,
   bloomPeak: BEATS.tumorGrowEnd,
   staticFrame: BEATS.tumorGrowEnd - 0.02,
 } as const;
@@ -59,5 +70,5 @@ export function declineFlicker(progressInBeat: number): number {
   const wave =
     Math.max(0, Math.sin(t * Math.PI * 7.3)) * 0.5 +
     Math.max(0, Math.sin(t * Math.PI * 3.1 + 1.4)) * 0.5;
-  return clamp01(Math.pow(wave, 6)) * 0.06;
+  return clamp01(Math.pow(wave, 6)) * 0.05;
 }

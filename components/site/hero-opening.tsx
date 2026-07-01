@@ -80,7 +80,7 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
     if (!section || !pin) return;
 
     const scroller = document.documentElement;
-    const distance = mobile ? '+=200%' : '+=280%';
+    const distance = mobile ? '+=260%' : '+=360%';
 
     const syncProgress = () => {
       const st = scrollTriggerRef.current;
