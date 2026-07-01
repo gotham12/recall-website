@@ -223,3 +223,5 @@ export const HERO_BRAIN = {
   healthy: '/screenshots/brain-diagram-healthy.png',
   decline: '/screenshots/brain-diagram-decline.png',
 } as const;
+
+export const HERO_INTRO_VIDEO = '/screenshots/hero-brain-intro.mp4';

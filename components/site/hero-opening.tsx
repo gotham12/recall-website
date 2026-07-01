@@ -1,6 +1,6 @@
 'use client';
 
-import { BrainDeclineSvg } from '@/components/site/brain-decline-svg';
+import { HeroIntroVideo } from '@/components/site/hero-intro-video';
 import { HeroBrainCopy } from '@/components/site/hero-brain-copy';
 import { useLenis } from '@/components/ui/smooth-scroll';
 import { BEATS, RESOLVE, clamp01, lerp } from '@/lib/brain-palette';
@@ -60,8 +60,6 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
   const lenis = useLenis();
   const [progress, setProgress] = useState(reducedMotion ? 1 : 0);
   const [showSkip, setShowSkip] = useState(!reducedMotion);
-
-  const brainSize = mobile ? 360 : 580;
 
   useEffect(() => {
     const bgBloom = bgBloomRef.current;
@@ -142,9 +140,7 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
         ref={pinRef}
         className="flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-16 pt-28"
       >
-        <div className="relative mb-2 md:mb-4">
-          <BrainDeclineSvg progress={progress} staticFrame={reducedMotion} size={brainSize} mobile={mobile} />
-        </div>
+        <HeroIntroVideo progress={progress} reducedMotion={reducedMotion} mobile={mobile} className="mb-2 md:mb-4" />
 
         <HeroBrainCopy progress={progress} reducedMotion={reducedMotion} className="mt-2 md:mt-4" />
       </div>
