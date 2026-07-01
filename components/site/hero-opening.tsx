@@ -2,9 +2,9 @@
 
 import { BrainDeclineSvg } from '@/components/site/brain-decline-svg';
 import { HeroBrainCopy } from '@/components/site/hero-brain-copy';
-import { SCROLLER } from '@/components/ui/smooth-scroll';
+import { useLenis } from '@/components/ui/smooth-scroll';
 import { BEATS, RESOLVE, clamp01, lerp } from '@/lib/brain-palette';
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -40,6 +40,13 @@ function useIsMobile() {
   );
 }
 
+function applyBloom(bgBloom: HTMLDivElement | null, p: number, mobile: boolean) {
+  if (!bgBloom) return;
+  gsap.set(bgBloom, {
+    opacity: lerp(0, mobile ? 0.5 : 0.72, clamp01((p - RESOLVE.bloomPeak) / (BEATS.resolveEnd - RESOLVE.bloomPeak))),
+  });
+}
+
 type HeroOpeningProps = {
   bgBloomRef: React.RefObject<HTMLDivElement>;
 };
@@ -50,33 +57,44 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
   const reducedMotion = usePrefersReducedMotion();
   const mobile = useIsMobile();
+  const lenis = useLenis();
   const [progress, setProgress] = useState(reducedMotion ? 1 : 0);
   const [showSkip, setShowSkip] = useState(!reducedMotion);
 
   const brainSize = mobile ? 360 : 580;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const bgBloom = bgBloomRef.current;
 
     if (reducedMotion) {
       setProgress(1);
       setShowSkip(false);
-      if (bgBloom) {
-        gsap.set(bgBloom, { opacity: mobile ? 0.5 : 0.72 });
-      }
+      applyBloom(bgBloom, 1, mobile);
       return;
     }
+
+    if (!lenis) return;
 
     const section = sectionRef.current;
     const pin = pinRef.current;
     if (!section || !pin) return;
 
+    const scroller = document.documentElement;
     const distance = mobile ? '+=200%' : '+=280%';
+
+    const syncProgress = () => {
+      const st = scrollTriggerRef.current;
+      if (!st) return;
+      const p = st.progress;
+      setProgress(p);
+      setShowSkip(p < 0.96);
+      applyBloom(bgBloom, p, mobile);
+    };
 
     const ctx = gsap.context(() => {
       const st = ScrollTrigger.create({
         trigger: section,
-        scroller: SCROLLER,
+        scroller,
         start: 'top top',
         end: distance,
         pin,
@@ -88,48 +106,41 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
           const p = self.progress;
           setProgress(p);
           setShowSkip(p < 0.96);
-
-          if (bgBloom) {
-            gsap.set(bgBloom, {
-              opacity: lerp(0, mobile ? 0.5 : 0.72, clamp01((p - RESOLVE.bloomPeak) / (BEATS.resolveEnd - RESOLVE.bloomPeak))),
-            });
-          }
+          applyBloom(bgBloom, p, mobile);
         },
       });
       scrollTriggerRef.current = st;
-      setProgress(st.progress);
+      syncProgress();
     }, section);
 
-    const refresh = () => ScrollTrigger.refresh();
+    const refresh = () => {
+      ScrollTrigger.refresh();
+      syncProgress();
+    };
     refresh();
-    window.addEventListener('lenis-ready', refresh);
     window.addEventListener('load', refresh);
+    window.addEventListener('resize', refresh);
 
     return () => {
-      window.removeEventListener('lenis-ready', refresh);
       window.removeEventListener('load', refresh);
+      window.removeEventListener('resize', refresh);
       scrollTriggerRef.current = null;
       ctx.revert();
     };
-  }, [reducedMotion, mobile, bgBloomRef]);
+  }, [reducedMotion, mobile, bgBloomRef, lenis]);
 
   const handleSkip = () => {
     const st = scrollTriggerRef.current;
     if (!st) return;
     st.scroll(st.end);
-    setProgress(1);
     setShowSkip(false);
-    const bgBloom = bgBloomRef.current;
-    if (bgBloom) {
-      gsap.set(bgBloom, { opacity: mobile ? 0.5 : 0.72 });
-    }
   };
 
   return (
     <div ref={sectionRef} className="relative z-40">
       <div
         ref={pinRef}
-        className="flex min-h-[100dvh] flex-col items-center justify-center bg-ink/90 px-6 pb-16 pt-28 backdrop-blur-[1px]"
+        className="flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-16 pt-28"
       >
         <div className="relative mb-2 md:mb-4">
           <BrainDeclineSvg progress={progress} staticFrame={reducedMotion} size={brainSize} mobile={mobile} />

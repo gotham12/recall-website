@@ -1,13 +1,12 @@
 'use client';
 
 import Lenis from 'lenis';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import 'lenis/dist/lenis.css';
+import { createContext, useContext, useLayoutEffect, useState, type ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-export const SCROLLER = typeof document !== 'undefined' ? document.documentElement : undefined;
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -22,9 +21,7 @@ export interface SmoothScrollProps {
 export function SmoothScroll({ children }: SmoothScrollProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
-  useEffect(() => {
-    ScrollTrigger.config({ ignoreMobileResize: true });
-
+  useLayoutEffect(() => {
     const instance = new Lenis({
       duration: 1.05,
       smoothWheel: true,
@@ -51,6 +48,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
           height: window.innerHeight,
         };
       },
+      pinType: 'transform',
     });
 
     ScrollTrigger.defaults({ scroller: document.documentElement });
@@ -77,7 +75,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       instance.off('scroll', onScroll);
       gsap.ticker.remove(tickerFn);
       ScrollTrigger.scrollerProxy(document.documentElement, {});
-      ScrollTrigger.defaults({ scroller: window });
+      ScrollTrigger.defaults({ scroller: document.documentElement });
       instance.destroy();
       setLenis(null);
       document.documentElement.classList.remove('lenis');
