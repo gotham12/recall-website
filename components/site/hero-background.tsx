@@ -8,8 +8,11 @@ export function HeroBackground() {
   const bgBloomRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
-      <div aria-hidden className="fixed inset-0 z-0 bg-gradient-to-b from-[#020408] via-ink to-ink">
+    <div className="contents">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-[#020408] via-ink to-ink"
+      >
         <div
           ref={bgBloomRef}
           className="absolute inset-0 opacity-0"
@@ -20,6 +23,6 @@ export function HeroBackground() {
         />
       </div>
       <HeroOpening bgBloomRef={bgBloomRef} />
-    </>
+    </div>
   );
 }

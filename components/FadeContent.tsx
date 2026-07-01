@@ -93,7 +93,7 @@ const FadeContent: React.FC<FadeContentProps> = ({
 
     const st = ScrollTrigger.create({
       trigger: el,
-      scroller: scrollerTarget || window,
+      scroller: scrollerTarget ?? document.documentElement,
       start: `top ${startPct}%`,
       once: true,
       onEnter: () => tl.play()

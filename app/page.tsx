@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main className="relative text-white">
       <HeroBackground />
-      <div className="relative z-10">
+      <div className="relative z-0">
         <Navbar />
         <SectionPanel background={stats.src} tone={stats.tone}>
           <HomeStatsBand />

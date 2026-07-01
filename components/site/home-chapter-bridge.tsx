@@ -32,6 +32,7 @@ export function HomeChapterBridge() {
           ease: 'none',
           scrollTrigger: {
             trigger: section,
+            scroller: document.documentElement,
             start: 'top 80%',
             end: 'bottom 20%',
             scrub: 1.2,

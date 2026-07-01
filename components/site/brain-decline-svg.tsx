@@ -2,42 +2,55 @@
 
 import {
   BEATS,
+  DECLINE_PALETTE,
+  HEALTHY_PALETTE,
+  RESOLVE,
+  RESOLUTION_GLOW,
+  TISSUE_FOCUS,
+  TUMOR_PALETTE,
   clamp01,
   declineFlicker,
   lerp,
+  lerpColor,
   localProgress,
 } from '@/lib/brain-palette';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
-import { forwardRef } from 'react';
+import { forwardRef, useId, useMemo } from 'react';
 
-function brainOutlinePath(s: number): string {
-  return `M ${s * 0.5} ${s * 0.17}
-    C ${s * 0.28} ${s * 0.15} ${s * 0.1} ${s * 0.27} ${s * 0.09} ${s * 0.45}
-    C ${s * 0.08} ${s * 0.58} ${s * 0.14} ${s * 0.68} ${s * 0.24} ${s * 0.74}
-    C ${s * 0.22} ${s * 0.8} ${s * 0.28} ${s * 0.85} ${s * 0.36} ${s * 0.84}
-    C ${s * 0.42} ${s * 0.86} ${s * 0.46} ${s * 0.82} ${s * 0.5} ${s * 0.78}
-    C ${s * 0.54} ${s * 0.82} ${s * 0.58} ${s * 0.86} ${s * 0.64} ${s * 0.84}
-    C ${s * 0.72} ${s * 0.85} ${s * 0.78} ${s * 0.8} ${s * 0.76} ${s * 0.74}
-    C ${s * 0.86} ${s * 0.68} ${s * 0.92} ${s * 0.58} ${s * 0.91} ${s * 0.45}
-    C ${s * 0.9} ${s * 0.27} ${s * 0.72} ${s * 0.15} ${s * 0.5} ${s * 0.17} Z`;
+const S = 400;
+const FOCUS_X = S * TISSUE_FOCUS.cx;
+const FOCUS_Y = S * TISSUE_FOCUS.cy;
+
+function brainOutlinePath(): string {
+  return `M ${S * 0.5} ${S * 0.17}
+    C ${S * 0.28} ${S * 0.15} ${S * 0.1} ${S * 0.27} ${S * 0.09} ${S * 0.45}
+    C ${S * 0.08} ${S * 0.58} ${S * 0.14} ${S * 0.68} ${S * 0.24} ${S * 0.74}
+    C ${S * 0.22} ${S * 0.8} ${S * 0.28} ${S * 0.85} ${S * 0.36} ${S * 0.84}
+    C ${S * 0.42} ${S * 0.86} ${S * 0.46} ${S * 0.82} ${S * 0.5} ${S * 0.78}
+    C ${S * 0.54} ${S * 0.82} ${S * 0.58} ${S * 0.86} ${S * 0.64} ${S * 0.84}
+    C ${S * 0.72} ${S * 0.85} ${S * 0.78} ${S * 0.8} ${S * 0.76} ${S * 0.74}
+    C ${S * 0.86} ${S * 0.68} ${S * 0.92} ${S * 0.58} ${S * 0.91} ${S * 0.45}
+    C ${S * 0.9} ${S * 0.27} ${S * 0.72} ${S * 0.15} ${S * 0.5} ${S * 0.17} Z`;
 }
 
-function foldStrokes(s: number): string[] {
+function foldStrokes(): string[] {
   return [
-    `M ${s * 0.18} ${s * 0.36} Q ${s * 0.3} ${s * 0.3} ${s * 0.4} ${s * 0.37} Q ${s * 0.3} ${s * 0.42} ${s * 0.18} ${s * 0.36} Z`,
-    `M ${s * 0.6} ${s * 0.32} Q ${s * 0.72} ${s * 0.28} ${s * 0.82} ${s * 0.38} Q ${s * 0.7} ${s * 0.4} ${s * 0.6} ${s * 0.32} Z`,
-    `M ${s * 0.22} ${s * 0.55} Q ${s * 0.32} ${s * 0.5} ${s * 0.42} ${s * 0.58} Q ${s * 0.32} ${s * 0.62} ${s * 0.22} ${s * 0.55} Z`,
-    `M ${s * 0.58} ${s * 0.56} Q ${s * 0.68} ${s * 0.5} ${s * 0.8} ${s * 0.6} Q ${s * 0.68} ${s * 0.64} ${s * 0.58} ${s * 0.56} Z`,
-    `M ${s * 0.5} ${s * 0.2} L ${s * 0.5} ${s * 0.76}`,
+    `M ${S * 0.18} ${S * 0.36} Q ${S * 0.3} ${S * 0.3} ${S * 0.4} ${S * 0.37} Q ${S * 0.3} ${S * 0.42} ${S * 0.18} ${S * 0.36} Z`,
+    `M ${S * 0.6} ${S * 0.32} Q ${S * 0.72} ${S * 0.28} ${S * 0.82} ${S * 0.38} Q ${S * 0.7} ${S * 0.4} ${S * 0.6} ${S * 0.32} Z`,
+    `M ${S * 0.22} ${S * 0.55} Q ${S * 0.32} ${S * 0.5} ${S * 0.42} ${S * 0.58} Q ${S * 0.32} ${S * 0.62} ${S * 0.22} ${S * 0.55} Z`,
+    `M ${S * 0.58} ${S * 0.56} Q ${S * 0.68} ${S * 0.5} ${S * 0.8} ${S * 0.6} Q ${S * 0.68} ${S * 0.64} ${S * 0.58} ${S * 0.56} Z`,
+    `M ${S * 0.5} ${S * 0.2} L ${S * 0.5} ${S * 0.76}`,
+    `M ${S * 0.55} ${S * 0.48} Q ${S * 0.62} ${S * 0.44} ${S * 0.68} ${S * 0.5}`,
+    `M ${S * 0.58} ${S * 0.54} Q ${S * 0.65} ${S * 0.52} ${S * 0.7} ${S * 0.58}`,
   ];
 }
 
-function tumorPath(s: number, cx: number, cy: number, r: number): string {
+function tumorPath(cx: number, cy: number, r: number): string {
   return `M ${cx} ${cy - r}
-    C ${cx + r * 0.7} ${cy - r * 0.75} ${cx + r * 1.05} ${cy - r * 0.1} ${cx + r * 0.8} ${cy + r * 0.5}
-    C ${cx + r * 0.55} ${cy + r * 1.0} ${cx - r * 0.5} ${cy + r * 0.95} ${cx - r * 0.85} ${cy + r * 0.35}
-    C ${cx - r * 1.05} ${cy - r * 0.15} ${cx - r * 0.55} ${cy - r * 0.7} ${cx} ${cy - r} Z`;
+    C ${cx + r * 0.65} ${cy - r * 0.7} ${cx + r * 0.95} ${cy - r * 0.05} ${cx + r * 0.75} ${cy + r * 0.45}
+    C ${cx + r * 0.5} ${cy + r * 0.95} ${cx - r * 0.45} ${cy + r * 0.9} ${cx - r * 0.8} ${cy + r * 0.3}
+    C ${cx - r * 0.95} ${cy - r * 0.2} ${cx - r * 0.5} ${cy - r * 0.65} ${cx} ${cy - r} Z`;
 }
 
 type BrainDeclineSvgProps = {
@@ -48,56 +61,68 @@ type BrainDeclineSvgProps = {
   size?: number;
 };
 
-/** Inline SVG brain diagram — no PNG matte, no black square. */
 export const BrainDeclineSvg = forwardRef<SVGSVGElement, BrainDeclineSvgProps>(function BrainDeclineSvg(
-  { progress, staticFrame = false, mobile = false, className, size = 520 },
+  { progress, staticFrame = false, mobile = false, className, size = 560 },
   ref
 ) {
-  const s = 400;
-  const p = staticFrame ? 0.85 : clamp01(progress);
-  const zoomEase = gsap.parseEase('back.out(1.35)');
+  const uid = useId().replace(/:/g, '');
+  const clipId = `brain-clip-${uid}`;
+
+  const p = staticFrame ? RESOLVE.staticFrame : clamp01(progress);
+  const zoomEase = gsap.parseEase('power2.inOut');
   const tumorEase = gsap.parseEase('power2.out');
 
-  let scale: number;
-  const maxScale = mobile ? 1.75 : 2.2;
+  const outline = useMemo(() => brainOutlinePath(), []);
+  const folds = useMemo(() => foldStrokes(), []);
 
-  if (staticFrame) {
-    scale = 1.05;
-  } else if (p <= BEATS.zoomEnd) {
-    const t = zoomEase(localProgress(p, 0, BEATS.zoomEnd));
-    scale = lerp(mobile ? 1.0 : 1.05, mobile ? 1.15 : 1.3, t);
-  } else if (p <= BEATS.darkenEnd) {
-    const t = localProgress(p, BEATS.zoomEnd, BEATS.darkenEnd);
-    scale = lerp(mobile ? 1.15 : 1.3, mobile ? 1.35 : 1.55, t);
-  } else if (p <= BEATS.tumorFillEnd) {
-    const t = localProgress(p, BEATS.darkenEnd, BEATS.tumorFillEnd);
-    scale = lerp(mobile ? 1.35 : 1.55, mobile ? 1.6 : 1.85, t);
+  const tissueZoomT = staticFrame
+    ? 1
+    : p <= BEATS.tissueZoomEnd
+      ? zoomEase(localProgress(p, 0, BEATS.tissueZoomEnd))
+      : 1;
+
+  const startCrop = mobile ? 108 : 98;
+  const midCrop = mobile ? 88 : 78;
+  const endCrop = mobile ? 62 : 52;
+
+  let cropSize: number;
+  if (p <= BEATS.tissueZoomEnd) {
+    cropSize = lerp(startCrop, midCrop, tissueZoomT);
+  } else if (p <= BEATS.tumorGrowEnd) {
+    cropSize = midCrop;
   } else {
-    const t = localProgress(p, BEATS.tumorFillEnd, BEATS.resolveEnd);
-    scale = lerp(mobile ? 1.6 : 1.85, maxScale, t);
+    cropSize = lerp(midCrop, endCrop, zoomEase(localProgress(p, BEATS.tumorGrowEnd, BEATS.resolveEnd)));
   }
 
-  const declineT = staticFrame ? 1 : clamp01(localProgress(p, BEATS.zoomEnd, BEATS.darkenEnd));
-  const lineOpacity = lerp(0.92, 0.38, declineT);
-  const lineColor = declineT > 0.5 ? '#9CA3AF' : '#E8E4DC';
+  const vx = FOCUS_X - cropSize / 2;
+  const vy = FOCUS_Y - cropSize / 2;
 
-  const tumorT = staticFrame ? 1 : clamp01(localProgress(p, BEATS.darkenEnd - 0.04, BEATS.tumorFillEnd));
-  const tumorOpacity = tumorEase(tumorT) * 0.55;
+  const declineT = staticFrame ? 1 : clamp01(localProgress(p, BEATS.tissueZoomEnd, BEATS.darkenEnd));
+  const tissueFill = lerpColor(HEALTHY_PALETTE.base, DECLINE_PALETTE.base, declineT);
+  const lineColor = lerpColor(HEALTHY_PALETTE.highlight, DECLINE_PALETTE.highlight, declineT);
+  const lineOpacity = lerp(0.88, 0.42, declineT);
+  const outlineOpacity = lerp(0.15, 0.55, tissueZoomT);
 
-  const flickerBeatT = staticFrame ? 0 : localProgress(p, BEATS.zoomEnd, BEATS.darkenEnd);
-  const inBeat3 = p > BEATS.zoomEnd && p < BEATS.darkenEnd;
-  const flicker = inBeat3 && !staticFrame ? declineFlicker(flickerBeatT) : 0;
+  const flickerT = staticFrame ? 0 : localProgress(p, BEATS.tissueZoomEnd, BEATS.darkenEnd);
+  const inDarken = p > BEATS.tissueZoomEnd && p < BEATS.darkenEnd;
+  const flicker = inDarken && !staticFrame ? declineFlicker(flickerT) : 0;
 
-  const resolveT = staticFrame ? 0 : clamp01(localProgress(p, 0.86, BEATS.resolveEnd));
-  const sceneOpacity = lerp(1, 0, clamp01((resolveT - 0.2) / 0.8));
-  const glowOpacity = staticFrame ? 0 : clamp01(localProgress(p, 0.8, BEATS.tumorFillEnd)) * 0.5;
+  const tumorT = staticFrame ? 1 : clamp01(localProgress(p, BEATS.darkenEnd, BEATS.tumorGrowEnd));
+  const tumorScale = lerp(0.32, 1.35, tumorEase(tumorT));
+  const tumorOpacity = lerp(0.28, 0.92, tumorEase(tumorT));
+  const tumorBlur = lerp(1.5, 3, tumorEase(tumorT));
 
-  const outline = brainOutlinePath(s);
-  const folds = foldStrokes(s);
+  const pulseT = staticFrame ? 0 : clamp01(localProgress(p, BEATS.darkenEnd, BEATS.tumorGrowEnd));
+  const tumorPulse = 1 + Math.sin(pulseT * Math.PI * 5) * 0.05 * pulseT;
+
+  const resolveT = staticFrame ? 0 : clamp01(localProgress(p, RESOLVE.sceneFade, BEATS.resolveEnd));
+  const sceneOpacity = lerp(1, 0, resolveT);
+  const glowT = staticFrame ? 0 : clamp01(localProgress(p, RESOLVE.bloomStart, RESOLVE.bloomPeak));
+  const glowOpacity = glowT * 0.65;
 
   return (
     <div
-      className={cn('relative select-none overflow-visible', className)}
+      className={cn('relative select-none overflow-hidden', className)}
       style={{ width: size, height: size, opacity: sceneOpacity }}
       aria-hidden
     >
@@ -105,71 +130,72 @@ export const BrainDeclineSvg = forwardRef<SVGSVGElement, BrainDeclineSvgProps>(f
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
-            width: size * 1.2,
-            height: size * 1.2,
+            width: size * 1.15,
+            height: size * 1.15,
             opacity: glowOpacity,
-            background:
-              'radial-gradient(circle, rgba(245,166,35,0.35) 0%, rgba(232,67,122,0.18) 40%, transparent 72%)',
+            background: `radial-gradient(circle, ${RESOLUTION_GLOW.amber}55 0%, ${RESOLUTION_GLOW.rose}33 45%, transparent 72%)`,
             filter: 'blur(36px)',
           }}
         />
       )}
 
-      <div
-        className="brain-decline-svg absolute inset-0"
-        style={{
-          transform: `scale(${scale.toFixed(4)})`,
-          transformOrigin: '50% 50%',
-        }}
+      <svg
+        ref={ref}
+        viewBox={`${vx} ${vy} ${cropSize} ${cropSize}`}
+        width={size}
+        height={size}
+        className="brain-decline-svg overflow-hidden"
+        style={{ background: 'transparent' }}
       >
-        <svg
-          ref={ref}
-          viewBox={`0 0 ${s} ${s}`}
-          width="100%"
-          height="100%"
-          className="overflow-visible"
-        >
-          <defs>
-            <clipPath id="brain-clip">
-              <path d={outline} />
-            </clipPath>
-            <filter id="tumor-soft" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation={mobile ? 6 : 8} />
-            </filter>
-          </defs>
+        <defs>
+          <clipPath id={clipId}>
+            <path d={outline} />
+          </clipPath>
+        </defs>
 
-          <path d={outline} fill="none" stroke={lineColor} strokeWidth={1.8} opacity={lineOpacity * 0.5} />
-          <path d={outline} fill="none" stroke={lineColor} strokeWidth={1.2} opacity={lineOpacity} />
+        <g clipPath={`url(#${clipId})`}>
+          <path d={outline} fill={tissueFill} opacity={lerp(0.82, 0.5, declineT)} />
 
-          <g clipPath="url(#brain-clip)" opacity={lerp(0.55, 0.25, declineT)}>
-            {folds.map((d, i) => (
-              <path
-                key={i}
-                d={d}
-                fill="none"
-                stroke={lineColor}
-                strokeWidth={i === 4 ? 1.4 : 1.1}
-                strokeLinecap="round"
-                opacity={lineOpacity}
-              />
-            ))}
-          </g>
+          {folds.map((d, i) => (
+            <path
+              key={i}
+              d={d}
+              fill="none"
+              stroke={lineColor}
+              strokeWidth={i >= 5 ? 0.9 : 1.1}
+              strokeLinecap="round"
+              opacity={lineOpacity}
+            />
+          ))}
 
           <g
-            clipPath="url(#brain-clip)"
             opacity={tumorOpacity}
-            transform={`translate(${s * 0.6} ${s * 0.52}) scale(${lerp(0.2, 1, tumorT)}) translate(${-s * 0.6} ${-s * 0.52})`}
+            transform={`translate(${FOCUS_X} ${FOCUS_Y}) scale(${tumorScale * tumorPulse}) translate(${-FOCUS_X} ${-FOCUS_Y})`}
           >
             <path
-              d={tumorPath(s, s * 0.6, s * 0.52, s * 0.14)}
-              fill="#3D3E45"
-              filter="url(#tumor-soft)"
+              d={tumorPath(FOCUS_X, FOCUS_Y, S * 0.11)}
+              fill={TUMOR_PALETTE.core}
+              style={{ filter: `blur(${tumorBlur}px)` }}
+            />
+            <path
+              d={tumorPath(FOCUS_X, FOCUS_Y, S * 0.07)}
+              fill={TUMOR_PALETTE.edge}
+              opacity={0.7}
             />
           </g>
 
-          {flicker > 0 && <rect x={0} y={0} width={s} height={s} fill="#000" opacity={flicker} />}
-        </svg>
-      </div>
+          {flicker > 0 && <rect x={0} y={0} width={S} height={S} fill="#000" opacity={flicker} />}
+        </g>
+
+        <path
+          d={outline}
+          fill="none"
+          stroke={lineColor}
+          strokeWidth={1.2}
+          opacity={outlineOpacity * lineOpacity}
+          clipPath={`url(#${clipId})`}
+        />
+      </svg>
     </div>
   );
 });

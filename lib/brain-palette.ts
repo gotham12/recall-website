@@ -1,30 +1,23 @@
-/** Brain-decline hero — healthy → grey → tumor → warm resolution. */
+/** Brain-decline hero — tissue zoom → dim → tumor growth → resolve. */
 
-/** Beat 1–2: healthy, distant brain. Warm, neutral, alive. */
 export const HEALTHY_PALETTE = {
   base: '#C9A98C',
   shadow: '#9C7B63',
   highlight: '#E8D2B8',
 } as const;
 
-/** Beat 3: years of decline. Desaturated, dim, but never pure black. */
 export const DECLINE_PALETTE = {
   base: '#6E6E73',
   shadow: '#48484D',
   highlight: '#85858B',
 } as const;
 
-/**
- * Beat 4: the mass. Soft, blurred, charcoal — a shadow, not a wound.
- * Deliberately capped away from black/red and kept low-opacity + heavily
- * blurred so it reads as solemn weight, not a graphic reveal.
- */
 export const TUMOR_PALETTE = {
-  core: '#2A2B30',
-  edge: '#3D3E45',
+  core: '#1A1B22',
+  edge: '#8B3D52',
+  pulse: '#C45C6A',
 } as const;
 
-/** Beat 4 resolution — reuses the site's existing warm "color returns" palette. */
 export const RESOLUTION_GLOW = {
   amber: '#F5A623',
   coral: '#FF6B4A',
@@ -32,17 +25,32 @@ export const RESOLUTION_GLOW = {
   violet: '#9B6EDB',
 } as const;
 
-export const SCENE_BG = {
-  neutral: '#0B0E14',
-  dim: '#06070A',
+/** Tissue focus — posterior right hemisphere where tumor emerges. */
+export const TISSUE_FOCUS = {
+  cx: 0.6,
+  cy: 0.52,
 } as const;
 
-/** Scroll-progress beat boundaries (0–1). No wide establishing shot — starts close. */
+/**
+ * Beat map (0–1). No wide establishing shot: p=0 is already cropped tissue.
+ */
 export const BEATS = {
-  zoomEnd: 0.32,
-  darkenEnd: 0.58,
-  tumorFillEnd: 0.82,
+  tissueZoomEnd: 0.3,
+  darkenEnd: 0.52,
+  tumorGrowEnd: 0.78,
   resolveEnd: 1,
+} as const;
+
+/** Shared thresholds for copy reveal, bloom, and SVG resolve. */
+export const RESOLVE = {
+  copyTagline: BEATS.tumorGrowEnd - 0.06,
+  copyHeadline: BEATS.tumorGrowEnd,
+  copySub: BEATS.tumorGrowEnd + 0.06,
+  copyCta: BEATS.tumorGrowEnd + 0.12,
+  sceneFade: BEATS.tumorGrowEnd + 0.04,
+  bloomStart: BEATS.darkenEnd,
+  bloomPeak: BEATS.tumorGrowEnd,
+  staticFrame: BEATS.tumorGrowEnd - 0.02,
 } as const;
 
 export function clamp01(v: number): number {
@@ -57,7 +65,6 @@ export function localProgress(global: number, start: number, end: number): numbe
   return clamp01((global - start) / (end - start));
 }
 
-/** Simple hex RGB lerp — no new color libraries needed. */
 export function lerpColor(from: string, to: string, t: number): string {
   const p = clamp01(t);
   const f = parseInt(from.slice(1), 16);
@@ -68,16 +75,10 @@ export function lerpColor(from: string, to: string, t: number): string {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
 }
 
-/**
- * Deterministic "time passage" flicker — a handful of brief dimming pulses
- * derived purely from progress (no timers/RAF), so fast-scrolling never
- * desyncs it and it reproduces identically every time.
- */
 export function declineFlicker(progressInBeat: number): number {
   const t = clamp01(progressInBeat);
   const wave =
     Math.max(0, Math.sin(t * Math.PI * 7.3)) * 0.5 +
     Math.max(0, Math.sin(t * Math.PI * 3.1 + 1.4)) * 0.5;
-  const pulse = Math.pow(wave, 6);
-  return clamp01(pulse) * 0.14;
+  return clamp01(Math.pow(wave, 6)) * 0.1;
 }

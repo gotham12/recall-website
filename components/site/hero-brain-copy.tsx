@@ -3,7 +3,7 @@
 import AnimatedButton from '@/components/ui/animated-button';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { DEMO_URL, HERO_COPY } from '@/lib/constants';
-import { clamp01, lerp } from '@/lib/brain-palette';
+import { RESOLVE, clamp01, lerp } from '@/lib/brain-palette';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -27,10 +27,10 @@ function wordOpacity(global: number, index: number, total: number, start: number
  */
 export function HeroBrainCopy({ progress, reducedMotion = false, className }: HeroBrainCopyProps) {
   const p = reducedMotion ? 1 : progress;
-  const taglineP = clamp01((p - 0.7) / 0.1);
-  const headlineP = clamp01((p - 0.78) / 0.16);
-  const subP = clamp01((p - 0.87) / 0.1);
-  const ctaP = clamp01((p - 0.93) / 0.07);
+  const taglineP = clamp01((p - RESOLVE.copyTagline) / 0.08);
+  const headlineP = clamp01((p - RESOLVE.copyHeadline) / 0.12);
+  const subP = clamp01((p - RESOLVE.copySub) / 0.1);
+  const ctaP = clamp01((p - RESOLVE.copyCta) / 0.08);
 
   return (
     <div className={cn('pointer-events-auto relative z-20 max-w-3xl text-center', className)}>
