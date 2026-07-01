@@ -20,7 +20,7 @@ export const HERO_COPY = {
   headline: 'When the world goes quiet, a name remains.',
   subhead:
     'For the person losing the thread of a day — and the daughter holding the rest together. Recall gives Margaret a voice that remembers, and Susan a signal she can trust.',
-  scrollHint: 'You just watched what decline feels like. Recall is what we built so it doesn\u2019t have to win.',
+  scrollHint: 'Scroll to see what we built in response.',
 } as const;
 
 /** Home stats band — verify figures before major press pushes. */
@@ -154,10 +154,10 @@ export const PITCH_SUMMARY = {
 export const PRIVACY_TRUST = {
   headline: 'Private by design',
   points: [
-    'Health data stays on-device first \u2014 Dexie (IndexedDB) offline storage before anything syncs',
-    'Edge AI inference on Cloudflare Workers; no patient audio stored for model training',
-    'Human-in-the-loop fallbacks for med verification and escalation \u2014 not black-box autopilot',
-    'Built for HIPAA-ready deployment patterns; we treat cognitive data as clinical-grade sensitive',
+    'Health data stays on-device first. Dexie (IndexedDB) offline storage before anything syncs.',
+    'Edge AI inference on Cloudflare Workers. No patient audio stored for model training.',
+    'Human-in-the-loop fallbacks for med verification and escalation. Not black-box autopilot.',
+    'Built for HIPAA-ready deployment patterns. We treat cognitive data as clinical-grade sensitive.',
   ],
   disclaimer:
     'Recall is pre-production health software. Pilot partners receive a full data-handling brief before onboarding.',
@@ -183,6 +183,6 @@ export const PAGE_BACKGROUNDS = {
 } as const;
 
 export const HERO_BRAIN = {
-  healthy: '/screenshots/brain-healthy.png',
-  tumor: '/screenshots/brain-tumor.png',
+  healthy: '/screenshots/brain-diagram-healthy.png',
+  decline: '/screenshots/brain-diagram-decline.png',
 } as const;

@@ -63,15 +63,14 @@ export function HomeChapterBridge() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         <FadeContent blur className="mx-auto mb-14 max-w-3xl text-center">
-          <p className="section-label mb-4">Two chapters. One arc.</p>
-          <h2 id="story-heading" className="font-display text-3xl text-white md:text-5xl">
+          <h2 id="story-heading" className="font-display text-3xl font-bold tracking-tight text-white md:text-5xl">
             Feel the weight of the problem.
-            <span className="mt-2 block bg-gradient-to-r from-recall-blue via-recall-violet to-recall-mint bg-clip-text text-transparent italic">
+            <span className="mt-2 block bg-gradient-to-r from-recall-blue via-recall-violet to-recall-mint bg-clip-text text-transparent">
               Then feel the lift of the product.
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-white/55 md:text-xl">
-            The story darkens before it brightens — one continuous emotional journey from crisis to clarity.
+            The story darkens before it brightens. One continuous journey from crisis to clarity.
           </p>
         </FadeContent>
 

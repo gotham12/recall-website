@@ -11,8 +11,8 @@ import {
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
 
-const BRAIN_HEALTHY_SRC = '/screenshots/brain-healthy.png';
-const BRAIN_TUMOR_SRC = '/screenshots/brain-tumor.png';
+const BRAIN_HEALTHY_SRC = '/screenshots/brain-diagram-healthy.png';
+const BRAIN_TUMOR_SRC = '/screenshots/brain-diagram-decline.png';
 
 type BrainDeclineSvgProps = {
   progress: number;
@@ -102,13 +102,15 @@ export function BrainDeclineSvg({
   /* ── Resolve warm glow ───────────────────────────────── */
   const glowOpacity = staticFrame ? 0 : clamp01(localProgress(p, 0.8, BEATS.tumorFillEnd)) * 0.65;
 
+  /* mix-blend-mode: screen makes the black photo background fully transparent
+     against the dark site bg while white diagram lines show through perfectly. */
   const imgStyle: React.CSSProperties = {
     position: 'absolute',
     inset: 0,
     width: '100%',
     height: '100%',
     objectFit: 'contain',
-    mixBlendMode: 'lighten',
+    mixBlendMode: 'screen',
     userSelect: 'none',
     pointerEvents: 'none',
   };

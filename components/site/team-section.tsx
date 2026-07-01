@@ -11,11 +11,10 @@ export function TeamSection({ bright = false }: { bright?: boolean }) {
   return (
     <section id="team" className="relative py-24 md:py-32">
       <FadeContent blur className="relative mx-auto max-w-6xl px-6">
-        <p className={cnLabel(bright)}>Meet the team</p>
         <ScrollReveal
           containerClassName="!my-0 max-w-3xl"
           textClassName={cn(
-            'font-display !text-4xl md:!text-5xl',
+            'font-display !text-4xl font-bold tracking-tight md:!text-5xl',
             bright ? '!text-product-950' : '!text-white'
           )}
         >
@@ -78,6 +77,3 @@ export function TeamSection({ bright = false }: { bright?: boolean }) {
   );
 }
 
-function cnLabel(bright: boolean) {
-  return cn('section-label mb-4', bright ? 'text-recall-blue/80' : 'text-white/45');
-}

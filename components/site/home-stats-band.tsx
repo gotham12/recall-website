@@ -3,85 +3,66 @@
 import CountUp from '@/components/CountUp';
 import FadeContent from '@/components/FadeContent';
 import { HOME_STATS } from '@/lib/constants';
-import { useEffect, useState } from 'react';
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  return reduced;
-}
-
-function StatValue({
-  value,
-  suffix,
-  prefix,
+function StatItem({
+  stat,
   delay,
+  large,
 }: {
-  value: number;
-  suffix?: string;
-  prefix?: string;
+  stat: (typeof HOME_STATS)[number];
   delay: number;
+  large?: boolean;
 }) {
-  const reduced = usePrefersReducedMotion();
-
-  if (reduced) {
-    return (
-      <span className="font-display text-6xl tracking-tight text-white md:text-7xl lg:text-8xl">
-        {prefix}
-        {value}
-        {suffix}
-      </span>
-    );
-  }
-
   return (
-    <span className="font-display text-6xl tracking-tight text-white md:text-7xl lg:text-8xl">
-      {prefix}
-      <CountUp to={value} duration={2.2} delay={delay} separator="," />
-      {suffix}
-    </span>
+    <FadeContent blur threshold={0.15} delay={delay}>
+      <div className={large ? '' : ''}>
+        <div
+          className={
+            large
+              ? 'font-display text-[5rem] font-extrabold leading-none tracking-tight text-white md:text-[7rem] lg:text-[8.5rem]'
+              : 'font-display text-6xl font-extrabold leading-none tracking-tight text-white md:text-7xl'
+          }
+        >
+          {'prefix' in stat && stat.prefix}
+          <CountUp to={stat.value} duration={2.4} delay={delay + 0.2} separator="," />
+          {stat.suffix}
+        </div>
+        <p className={`mt-4 leading-snug text-white/65 ${large ? 'max-w-xs text-xl md:text-2xl' : 'max-w-[220px] text-lg'}`}>
+          {stat.label}
+        </p>
+        <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/30">{stat.source}</p>
+      </div>
+    </FadeContent>
   );
 }
 
 export function HomeStatsBand() {
   return (
-    <section id="stats" aria-labelledby="stats-heading" className="relative py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <FadeContent blur className="mb-14 max-w-2xl">
-          <p id="stats-heading" className="section-label mb-3">
-            The scale of what families carry
-          </p>
-          <h2 className="font-display text-2xl text-white/90 md:text-3xl">
-            Memory loss is not a niche problem. It is a quiet global crisis.
-          </h2>
-        </FadeContent>
+    <section id="stats" aria-labelledby="stats-context" className="relative py-20 md:py-28">
+      {/* Hairline separator — no eyebrow, the numbers speak */}
+      <div aria-hidden className="mx-auto mb-16 max-w-6xl px-6">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+      </div>
 
-        <div className="grid gap-12 md:grid-cols-3 md:gap-8 lg:gap-16">
-          {HOME_STATS.map((stat, i) => (
-            <FadeContent key={stat.id} blur threshold={0.12} delay={i * 0.12}>
-              <div className="text-left md:text-center">
-                <StatValue
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  prefix={'prefix' in stat ? stat.prefix : undefined}
-                  delay={i * 0.35}
-                />
-                <p className="mt-4 max-w-xs text-lg leading-snug text-white/70 md:mx-auto md:text-xl">
-                  {stat.label}
-                </p>
-                <p className="mt-3 text-xs uppercase tracking-[0.16em] text-white/35 md:text-sm">
-                  {stat.source}
-                </p>
-              </div>
-            </FadeContent>
-          ))}
+      <div className="mx-auto max-w-6xl px-6">
+        {/* Asymmetric layout: first stat large-left, two others stacked right */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-[1.4fr_1fr]">
+          {/* Left: hero stat — large numeral */}
+          <div>
+            <StatItem stat={HOME_STATS[0]} delay={0} large />
+          </div>
+
+          {/* Right: two smaller stats stacked */}
+          <div className="flex flex-col justify-center gap-10 md:gap-12">
+            {HOME_STATS.slice(1).map((stat, i) => (
+              <StatItem key={stat.id} stat={stat} delay={(i + 1) * 0.18} />
+            ))}
+          </div>
         </div>
+      </div>
+
+      <div aria-hidden className="mx-auto mt-16 max-w-6xl px-6">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
       </div>
     </section>
   );

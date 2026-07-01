@@ -36,7 +36,7 @@ export function HeroBrainCopy({ progress, reducedMotion = false, className }: He
   return (
     <div className={cn('pointer-events-auto relative z-20 max-w-3xl text-center', className)}>
       <p
-        className="mb-4 font-display text-sm uppercase tracking-[0.22em] text-white/40"
+        className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-white/40"
         style={{
           opacity: taglineP,
           filter: reducedMotion ? 'none' : `blur(${lerp(6, 0, taglineP)}px)`,
@@ -46,7 +46,7 @@ export function HeroBrainCopy({ progress, reducedMotion = false, className }: He
         Grey fades. Color returns.
       </p>
 
-      <h1 className="font-display text-4xl leading-[1.12] text-white md:text-5xl lg:text-6xl">
+      <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-6xl">
         {HEADLINE_WORDS.map((word, i) => {
           const wo = wordOpacity(headlineP, i, HEADLINE_WORDS.length, 0, 0.8);
           return (
