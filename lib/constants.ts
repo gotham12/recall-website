@@ -166,13 +166,13 @@ export const PRIVACY_TRUST = {
 export const TEAM = [
   {
     name: 'Advaith Vijayasankaran',
-    role: 'Co-Founder & CEO',
+    role: 'Co-Founder & Co-CEO',
     photo: '/screenshots/advaith-vijayasankaran.png',
     bio: 'Advaith built Recall end to end — Clara for Margaret, Recall AI for Susan, and the ACSE engine that scores cognitive stability in real time. He designed the offline-first care graph, edge AI on Cloudflare, vision med verification, Comfort Mode de-escalation, and the Recall Cascade that turns early signal into action before crisis. Recall is his answer to watching families carry dementia care alone: AI-native infrastructure that preserves dignity, catches decline early, and gives caregivers plain-English signal instead of guesswork.',
   },
   {
     name: 'Param Tyagi',
-    role: 'Co-Founder & CTO',
+    role: 'Co-Founder & Co-CEO',
     photo: '/screenshots/param-tyagi.png',
     bio: 'Param co-founded Recall as CTO and owns the production engineering stack — the React and TypeScript client, Capacitor iOS shell, Dexie offline database, and Cloudflare Workers that run LLM, TTS, and vision inference at the edge. He built the sync layer that keeps Margaret\u2019s and Susan\u2019s experiences consistent, the GitHub Pages and CI pipeline that ships the live demo, and the observability patterns that make Recall reliable when families need it most. He turns clinical requirements into systems that actually ship.',
   },
