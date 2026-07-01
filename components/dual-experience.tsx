@@ -44,7 +44,7 @@ function ExperienceColumn({
 
 export function DualExperienceSection() {
   return (
-    <section className="border-y border-product-200/80 bg-white/40 py-24 md:py-32">
+    <section className="py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="mx-auto max-w-3xl text-center">
           <p className="section-label mb-4">Two experiences</p>

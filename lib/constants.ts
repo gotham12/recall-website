@@ -20,8 +20,45 @@ export const HERO_COPY = {
   headline: 'When the world goes quiet, a name remains.',
   subhead:
     'For the person losing the thread of a day — and the daughter holding the rest together. Recall gives Margaret a voice that remembers, and Susan a signal she can trust.',
-  scrollHint: 'Scroll to see what we built in response.',
 } as const;
+
+/** Per-section neuro-related backgrounds — home (dark → warm). */
+export const HOME_SECTION_BACKGROUNDS = [
+  { src: '/screenshots/problem-brain-atmosphere.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-elderly-alone.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-caregiver-burnout.png', tone: 'dark-neutral' as const },
+  { src: '/screenshots/problem-atmosphere.png', tone: 'dark-neutral' as const },
+  { src: '/screenshots/product-hope.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/recall-neural-care.png', tone: 'dark-neutral' as const },
+  { src: '/screenshots/flower-forget-me-not-bloom.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/problem-brain-atmosphere.png', tone: 'dark-neutral' as const },
+  { src: '/screenshots/product-hope.png', tone: 'bright-hopeful' as const },
+] as const;
+
+/** Problem page — darker, sadder. */
+export const PROBLEM_SECTION_BACKGROUNDS = [
+  { src: '/screenshots/problem-brain-atmosphere.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-elderly-alone.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-caregiver-burnout.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-empty-clinic.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-medication-error.png', tone: 'dark-sad' as const },
+  { src: '/screenshots/problem-atmosphere.png', tone: 'dark-neutral' as const },
+] as const;
+
+/** Product page — brighter, happier. */
+export const PRODUCT_SECTION_BACKGROUNDS = [
+  { src: '/screenshots/product-hope.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/flower-forget-me-not-bloom.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/flower-daisy-hyperreal.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/flower-lavender-hyperreal.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/flower-peony-hyperreal.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/flower-rose-hyperreal.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/recall-neural-care.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/flower-forget-me-not.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/product-hope.png', tone: 'bright-hopeful' as const },
+  { src: '/screenshots/flower-lavender-hyperreal.png', tone: 'bright-warm' as const },
+  { src: '/screenshots/flower-daisy-hyperreal.png', tone: 'bright-hopeful' as const },
+] as const;
 
 /** Home stats band — verify figures before major press pushes. */
 export const HOME_STATS = [

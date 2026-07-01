@@ -36,11 +36,9 @@ const tags = ['Offline-first', 'Edge AI on Cloudflare', 'Apple Health', 'Comfort
 
 export function SolutionSection() {
   return (
-    <section id="solution" className="relative overflow-hidden border-y border-product-200/80 bg-white/50 py-24 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(52,211,153,0.15),transparent_40%),radial-gradient(circle_at_10%_100%,rgba(79,140,255,0.12),transparent_35%)]" />
-      <div className="relative mx-auto max-w-6xl px-6">
+    <section id="solution" className="relative w-full py-12 md:py-16">
+      <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="max-w-2xl">
-          <p className="section-label mb-4">Chapter 2 · The product</p>
           <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl !leading-[1.08] text-product-950 md:!text-5xl">
             Recall closes the gap before crisis.
           </ScrollReveal>
@@ -93,7 +91,6 @@ export function SolutionSection() {
           >
             <div className="flex w-full flex-col items-start justify-between gap-6 p-8 md:flex-row md:items-center md:p-10">
               <div className="max-w-xl text-left">
-                <p className="section-label mb-2">The Recall difference</p>
                 <h3 className="font-display text-2xl text-product-950 md:text-3xl">Prevention, not paperwork.</h3>
                 <p className="mt-3 text-product-800/70">
                   Most tools track tasks. Recall tracks cognitive stability — then acts. ACSE below 50 triggers Comfort

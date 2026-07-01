@@ -37,12 +37,11 @@ export const SCENE_BG = {
   dim: '#06070A',
 } as const;
 
-/** Scroll-progress beat boundaries (0–1) shared by SVG + copy choreography. */
+/** Scroll-progress beat boundaries (0–1). No wide establishing shot — starts close. */
 export const BEATS = {
-  establishingEnd: 0.18,
-  zoomEnd: 0.4,
-  darkenEnd: 0.66,
-  tumorFillEnd: 0.88,
+  zoomEnd: 0.32,
+  darkenEnd: 0.58,
+  tumorFillEnd: 0.82,
   resolveEnd: 1,
 } as const;
 

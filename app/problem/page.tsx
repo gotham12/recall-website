@@ -1,20 +1,24 @@
 import { ResearchProblemSection } from '@/components/research-problem';
 import { ProblemBridge } from '@/components/site/problem-bridge';
 import { DevLinksSection } from '@/components/site/dev-links';
-import { FlowerBackground } from '@/components/site/flower-background';
+import { SectionPanel } from '@/components/site/section-panel';
 import { SiteFooter } from '@/components/product-sections';
 import { Navbar } from '@/components/site/navbar';
+import { PROBLEM_SECTION_BACKGROUNDS } from '@/lib/constants';
 
 export default function ProblemPage() {
+  const bridgeBg = PROBLEM_SECTION_BACKGROUNDS[5];
+
   return (
-    <main className="theme-problem relative min-h-screen text-zinc-100">
-      <FlowerBackground phase="problem" />
+    <main className="relative text-zinc-100">
       <div className="relative z-10">
         <Navbar tone="dark" />
         <ResearchProblemSection />
-        <ProblemBridge />
-        <DevLinksSection />
-        <SiteFooter variant="dark" />
+        <SectionPanel background={bridgeBg.src} tone={bridgeBg.tone}>
+          <ProblemBridge />
+          <DevLinksSection />
+          <SiteFooter variant="dark" />
+        </SectionPanel>
       </div>
     </main>
   );

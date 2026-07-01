@@ -31,7 +31,6 @@ export function HeroBrainCopy({ progress, reducedMotion = false, className }: He
   const headlineP = clamp01((p - 0.78) / 0.16);
   const subP = clamp01((p - 0.87) / 0.1);
   const ctaP = clamp01((p - 0.93) / 0.07);
-  const hintP = clamp01((p - 0.97) / 0.03);
 
   return (
     <div className={cn('pointer-events-auto relative z-20 max-w-3xl text-center', className)}>
@@ -98,13 +97,6 @@ export function HeroBrainCopy({ progress, reducedMotion = false, className }: He
           </InteractiveHoverButton>
         </Link>
       </div>
-
-      <p
-        className="mx-auto mt-6 max-w-md text-sm text-white/40 md:text-base"
-        style={{ opacity: hintP * 0.85 }}
-      >
-        {HERO_COPY.scrollHint}
-      </p>
     </div>
   );
 }

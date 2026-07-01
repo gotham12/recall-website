@@ -11,6 +11,7 @@ import { GlowBorderCard } from '@/components/ui/glow-border-card';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import SpotlightCard from '@/components/SpotlightCard';
 import { DEMO_URL } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 import {
   Activity,
   Camera,
@@ -133,16 +134,21 @@ const chromaScreens = [
   { image: '/screenshots/supervisor-overview.png', title: 'Overview', subtitle: 'Supervisor · Vitals', borderColor: '#4F8CFF' },
 ];
 
-export function FeaturesBento() {
+export function FeaturesBento({ bright = false }: { bright?: boolean }) {
   return (
-    <section id="features" className="py-20 md:py-28">
+    <section id="features" className="py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="mb-12 max-w-2xl">
-          <p className="section-label mb-4">Platform</p>
-          <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl text-white md:!text-5xl">
+          <ScrollReveal
+            containerClassName="!my-0"
+            textClassName={cn(
+              'font-display !text-4xl md:!text-5xl',
+              bright ? '!text-product-950' : '!text-white'
+            )}
+          >
             Two lenses. One brain.
           </ScrollReveal>
-          <p className="mt-4 text-lg text-white/55">
+          <p className={cn('mt-4 text-lg', bright ? 'text-product-800/75' : 'text-white/55')}>
             Patient and caregiver experiences share the same Dexie database — meds, routines, vitals, events, and Clara
             activity. No stale copies.
           </p>
@@ -153,27 +159,37 @@ export function FeaturesBento() {
   );
 }
 
-export function CascadeSection() {
+export function CascadeSection({ bright = false }: { bright?: boolean }) {
   return (
-    <section id="cascade" className="border-y border-white/5 bg-ink-50/40 py-20 md:py-28">
+    <section id="cascade" className="py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="mb-12 text-center">
-          <p className="section-label mb-4">The Recall Cascade™</p>
           <ScrollReveal
             containerClassName="!my-0 mx-auto max-w-4xl"
-            textClassName="font-display !text-3xl text-white md:!text-5xl"
+            textClassName={cn(
+              'font-display !text-3xl md:!text-5xl',
+              bright ? '!text-product-950' : '!text-white'
+            )}
           >
             Signal → Score → Intervention → Caregiver
           </ScrollReveal>
-          <p className="mx-auto mt-4 max-w-xl text-white/55">Automatically. Before crisis.</p>
+          <p className={cn('mx-auto mt-4 max-w-xl', bright ? 'text-product-800/70' : 'text-white/55')}>
+            Automatically. Before crisis.
+          </p>
         </FadeContent>
         <div className="grid gap-4 md:grid-cols-4">
           {cascadeSteps.map((s) => (
             <FadeContent key={s.step} blur threshold={0.1}>
-              <SpotlightCard className="border-white/10 bg-ink-100/70 p-6" spotlightColor="rgba(79, 140, 255, 0.18)">
-                <div className="font-display text-4xl text-white/15">{s.step}</div>
-                <h3 className="mt-2 text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-white/50">{s.desc}</p>
+              <SpotlightCard
+                className={cn(
+                  'p-6',
+                  bright ? 'border-product-200 bg-white/90' : 'border-white/10 bg-ink-100/70'
+                )}
+                spotlightColor="rgba(79, 140, 255, 0.18)"
+              >
+                <div className={cn('font-display text-4xl', bright ? 'text-product-800/20' : 'text-white/15')}>{s.step}</div>
+                <h3 className={cn('mt-2 text-lg font-semibold', bright ? 'text-product-950' : 'text-white')}>{s.title}</h3>
+                <p className={cn('mt-2 text-sm', bright ? 'text-product-800/65' : 'text-white/50')}>{s.desc}</p>
               </SpotlightCard>
             </FadeContent>
           ))}
@@ -205,17 +221,22 @@ export function ScreenshotsSection() {
   );
 }
 
-export function StackSection() {
+export function StackSection({ bright = false }: { bright?: boolean }) {
   return (
-    <section id="stack" className="border-t border-white/5 py-20 md:py-28">
+    <section id="stack" className="py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-2">
           <FadeContent blur>
-            <p className="section-label mb-4">Technology</p>
-            <ScrollReveal containerClassName="!my-0" textClassName="font-display !text-4xl text-white md:!text-5xl">
+            <ScrollReveal
+              containerClassName="!my-0"
+              textClassName={cn(
+                'font-display !text-4xl md:!text-5xl',
+                bright ? '!text-product-950' : '!text-white'
+              )}
+            >
               Production-deployed today.
             </ScrollReveal>
-            <p className="mt-4 text-lg text-white/55">
+            <p className={cn('mt-4 text-lg', bright ? 'text-product-800/75' : 'text-white/55')}>
               React and TypeScript on the client. Zustand for state. Dexie for offline storage. Cloudflare Workers for
               LLM, TTS, and vision — deployed on GitHub Pages with an edge API.
             </p>
@@ -223,12 +244,15 @@ export function StackSection() {
           <div className="grid gap-3 sm:grid-cols-2">
             {stack.map((s) => (
               <FadeContent key={s.name} blur threshold={0.1}>
-                <SpotlightCard className="border-white/10 bg-ink-100/60 p-4" spotlightColor="rgba(79, 140, 255, 0.15)">
+                <SpotlightCard
+                  className={cn('p-4', bright ? 'border-product-200 bg-white/90' : 'border-white/10 bg-ink-100/60')}
+                  spotlightColor="rgba(79, 140, 255, 0.15)"
+                >
                   <div className="flex items-start gap-3">
                     <s.icon className="mt-0.5 h-5 w-5 shrink-0 text-recall-blue" strokeWidth={1.75} />
                     <div>
-                      <div className="text-sm font-semibold">{s.name}</div>
-                      <div className="text-xs text-white/45">{s.detail}</div>
+                      <div className={cn('text-sm font-semibold', bright ? 'text-product-950' : 'text-white')}>{s.name}</div>
+                      <div className={cn('text-xs', bright ? 'text-product-800/60' : 'text-white/45')}>{s.detail}</div>
                     </div>
                   </div>
                 </SpotlightCard>
@@ -238,7 +262,6 @@ export function StackSection() {
         </div>
 
         <FadeContent blur className="mt-20">
-          <p className="section-label mb-4 text-center">Live agent workspace</p>
           <AgentBentoGrid />
         </FadeContent>
       </div>

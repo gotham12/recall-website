@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export function ProblemBridge() {
   return (
-    <section className="relative border-t border-zinc-800 bg-black py-28 md:py-32">
+    <section className="relative w-full py-12 md:py-16">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <BlurText
           text="There is a way forward."

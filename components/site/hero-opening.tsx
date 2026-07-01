@@ -46,7 +46,7 @@ export function HeroOpening({ bgBloomRef }: HeroOpeningProps) {
   const [progress, setProgress] = useState(reducedMotion ? 1 : 0);
   const [showSkip, setShowSkip] = useState(!reducedMotion);
 
-  const brainSize = mobile ? 260 : 420;
+  const brainSize = mobile ? 340 : 560;
 
   useEffect(() => {
     if (reducedMotion) {

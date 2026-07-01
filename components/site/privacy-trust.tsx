@@ -9,7 +9,7 @@ const icons = [Lock, Server, UserCheck, Shield];
 
 export function PrivacyTrustSection({ bright = false }: { bright?: boolean }) {
   return (
-    <section id="privacy" className={cn('relative py-16 md:py-20', bright ? 'bg-white/40' : '')}>
+    <section id="privacy" className="relative py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <FadeContent blur className="mb-10 max-w-3xl">
           <p className={cn('section-label mb-3', bright ? 'text-recall-blue/80' : 'text-white/45')}>
